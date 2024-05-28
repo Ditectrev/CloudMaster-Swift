@@ -1,0 +1,44 @@
+name: "Build iOS app"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    branches: [main]
+
+jobs:
+  build_with_signing:
+    runs-on: macos-latest
+    steps:
+      - name: check Xcode version
+        run: /usr/bin/xcodebuild -version
+
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: check Xcode List
+        run: /usr/bin/xcodebuild -list
+
+      - name: build archive
+        run: |
+          xcodebuild -scheme "CloudMaster" \
+          -archivePath $RUNNER_TEMP/cloudmaster.xcarchive \
+          -sdk iphoneos \
+          -configuration Debug \
+          -destination generic/platform=iOS \
+          clean archive          
+
+      - name: export ipa
+        env:
+          EXPORT_OPTIONS_PLIST: ${{ secrets.EXPORT_OPTIONS_PLIST }}
+        run: |
+          xcodebuild -exportArchive -archivePath $RUNNER_TEMP/cloudmaster.xcarchive -exportPath $RUNNER_TEMP/build          
+
+      - name: Upload application
+        uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: ${{ runner.temp }}/build
+          retention-days: 3
