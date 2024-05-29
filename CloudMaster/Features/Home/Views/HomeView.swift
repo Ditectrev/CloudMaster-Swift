@@ -60,6 +60,7 @@ struct HomeView: View {
             .navigationBarItems( trailing: settingsButton)
         }
         .navigationBarBackButtonHidden(true)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 
     func saveFavoritesOnDismiss() {
