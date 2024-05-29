@@ -23,6 +23,7 @@ struct IntroView: View {
             }
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .fullScreenCover(isPresented: $showLoadingView) {
             LoadingView(favorites: $favorites, isSetupComplete: $isAppConfigured)
         }
@@ -32,8 +33,13 @@ struct IntroView: View {
 struct FirstPage: View {
     let onNext: () -> Void
     @Environment(\.colorScheme) var colorScheme
+    
+   
 
     var body: some View {
+        let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+        let imageSize: CGFloat = isIpad ? 300 : 200
+        
         VStack {
             Text("Welcome to CloudMaster")
                 .font(.largeTitle)
@@ -53,7 +59,7 @@ struct FirstPage: View {
             Image(colorScheme == .dark ? "CM_white" : "CM_black")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 200, height: 200)
+                .frame(width: imageSize, height: imageSize)
             
             Spacer()
 

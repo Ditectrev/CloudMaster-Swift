@@ -10,7 +10,6 @@ struct CoursesView: View {
     @State private var showAlert = false
 
     var body: some View {
-        NavigationView {
             VStack {
                 SearchBar(text: $searchText)
                     .padding()
@@ -33,7 +32,6 @@ struct CoursesView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Download Error"), message: Text(alertMessage ?? ""), dismissButton: .default(Text("OK")))
             }
-        }
     }
 }
 

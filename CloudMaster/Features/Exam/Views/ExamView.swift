@@ -25,7 +25,6 @@ struct ExamView: View {
     }
 
     var body: some View {
-        NavigationView {
             VStack {
                 if !questionLoader.questions.isEmpty {
                     let questions = Array(questionLoader.questions.prefix(questionCount))
@@ -91,7 +90,6 @@ struct ExamView: View {
                     Text("Loading questions...")
                 }
             }
-            .navigationBarBackButtonHidden(true)
             .onAppear(perform: startTimer)
             .onDisappear {
                 if !showSummary {
@@ -103,7 +101,6 @@ struct ExamView: View {
                     ExamSummaryView(exam: examData)
                 }
             }
-        }
     }
 
     func startTimer() {
