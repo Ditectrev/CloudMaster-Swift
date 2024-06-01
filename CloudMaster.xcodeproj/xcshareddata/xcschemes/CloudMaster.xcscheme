@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8D8D8A702C05A23400ACC61C"
-               BuildableName = "Ditectrev Education.app"
+               BuildableName = "CloudMaster Swift.app"
                BlueprintName = "CloudMaster"
                ReferencedContainer = "container:CloudMaster.xcodeproj">
             </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D8D8A702C05A23400ACC61C"
-            BuildableName = "Ditectrev Education.app"
+            BuildableName = "CloudMaster Swift.app"
             BlueprintName = "CloudMaster"
             ReferencedContainer = "container:CloudMaster.xcodeproj">
          </BuildableReference>
@@ -86,7 +86,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D8D8A702C05A23400ACC61C"
-            BuildableName = "Ditectrev Education.app"
+            BuildableName = "CloudMaster Swift.app"
             BlueprintName = "CloudMaster"
             ReferencedContainer = "container:CloudMaster.xcodeproj">
          </BuildableReference>
@@ -97,7 +97,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "Ditectrev Education"
+      customArchiveName = "CloudMaster Swift"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

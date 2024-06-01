@@ -62,7 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8D8D8A712C05A23400ACC61C /* Ditectrev Education.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ditectrev Education.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D8D8A712C05A23400ACC61C /* CloudMaster Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CloudMaster Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D8D8A812C05A23600ACC61C /* CloudMasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudMasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D8D8A852C05A23600ACC61C /* CloudMasterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudMasterTests.swift; sourceTree = "<group>"; };
 		8D8D8A8B2C05A23600ACC61C /* CloudMasterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudMasterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,7 +144,7 @@
 		8D8D8A722C05A23400ACC61C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D8D8A712C05A23400ACC61C /* Ditectrev Education.app */,
+				8D8D8A712C05A23400ACC61C /* CloudMaster Swift.app */,
 				8D8D8A812C05A23600ACC61C /* CloudMasterTests.xctest */,
 				8D8D8A8B2C05A23600ACC61C /* CloudMasterUITests.xctest */,
 			);
@@ -428,7 +428,7 @@
 			);
 			name = CloudMaster;
 			productName = CloudMaster;
-			productReference = 8D8D8A712C05A23400ACC61C /* Ditectrev Education.app */;
+			productReference = 8D8D8A712C05A23400ACC61C /* CloudMaster Swift.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8D8D8A802C05A23600ACC61C /* CloudMasterTests */ = {
@@ -736,7 +736,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CloudMaster/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 9D3QHQ7CMS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "CloudMaster Swift";
@@ -749,9 +749,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
-				PRODUCT_NAME = "Ditectrev Education";
+				PRODUCT_NAME = "CloudMaster Swift";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -769,7 +769,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CloudMaster/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 9D3QHQ7CMS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "CloudMaster Swift";
@@ -782,9 +782,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
-				PRODUCT_NAME = "Ditectrev Education";
+				PRODUCT_NAME = "CloudMaster Swift";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
