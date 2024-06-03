@@ -4,12 +4,12 @@ struct Question: Identifiable, Codable {
     let id = UUID()
     let question: String
     let choices: [Choice]
-    
     var multipleResponse: Bool
     var responseCount: Int
+    let imagePath: String?
 
     enum CodingKeys: String, CodingKey {
-        case question, choices, multipleResponse = "multiple_response", responseCount = "response_count"
+        case question, choices, multipleResponse = "multiple_response", responseCount = "response_count", imagePath = "imagePath"
     }
     
     init(from decoder: Decoder) throws {
@@ -18,6 +18,7 @@ struct Question: Identifiable, Codable {
         choices = try container.decode([Choice].self, forKey: .choices)
         multipleResponse = try container.decodeIfPresent(Bool.self, forKey: .multipleResponse) ?? false
         responseCount = try container.decodeIfPresent(Int.self, forKey: .responseCount) ?? 0
+        imagePath = try container.decodeIfPresent(String.self, forKey: .imagePath)
     }
 }
 
@@ -95,4 +96,3 @@ class QuestionLoader: ObservableObject {
         loadQuestions(from: filename)
     }
 }
-

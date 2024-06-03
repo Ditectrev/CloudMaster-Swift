@@ -6,19 +6,14 @@ struct TrainingView: View {
     @State private var showResult = false
     @State private var userTrainingData = UserTrainingStore.shared.trainingData
     @State private var startTime: Date?
-    @State private var isDownloading = false
-    @State private var overallProgress = 0.0
-    @State private var alertMessage: String?
-    @State private var showAlert = false
     @Environment(\.presentationMode) var presentationMode
-
 
     let course: Course
     @ObservedObject var questionLoader: QuestionLoader
 
-    init(course: Course, intelligentLearning: Bool) {
+    init(course: Course, questionLoader: QuestionLoader) {
         self.course = course
-        self._questionLoader = ObservedObject(wrappedValue: QuestionLoader(filename: course.shortName + ".json", intelligentLearning: intelligentLearning))
+        self._questionLoader = ObservedObject(wrappedValue: questionLoader)
         loadUserTrainingData(for: course)
     }
 
@@ -79,10 +74,7 @@ struct TrainingView: View {
                 }
                 .padding(.top)
             } else {
-                Text("Loading")
-                    .onAppear {
-                        downloadCourse()
-                    }
+                Text("No Questions available! Please download course")
             }
 
             Spacer()
@@ -93,10 +85,6 @@ struct TrainingView: View {
         }
         .onDisappear {
             saveUserTrainingData()
-        }
-        .overlay(DownloadOverlayView(isShowing: $isDownloading, progress: $overallProgress))
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Download Error"), message: Text(alertMessage ?? ""), dismissButton: .default(Text("OK")))
         }
     }
 
@@ -144,29 +132,6 @@ struct TrainingView: View {
             UserDefaults.standard.set(data, forKey: course.shortName)
         }
     }
-
-    func downloadCourse() {
-        isDownloading = true
-        DownloadUtility.downloadAndConvertCourse(course: course, progressHandler: { progress in
-            DispatchQueue.main.async {
-                overallProgress = progress.fractionCompleted
-            }
-        }) { result in
-            DispatchQueue.main.async {
-                isDownloading = false
-                switch result {
-                case .success:
-                    questionLoader.reloadQuestions(from: course.shortName + ".json")
-                case .failure(let error):
-                    alertMessage = "Failed to download \(course.shortName): \(error.localizedDescription)"
-                    showAlert = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // Adjust the delay as needed
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
-            }
-        }
-    }
 }
 
 struct TrainingQuestion: View {
@@ -186,6 +151,15 @@ struct TrainingQuestion: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal)
 
+                if let imagePath = question.imagePath,
+                   let image = loadImage(from: imagePath) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .cornerRadius(2)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal)
+                }
                 if isMultipleResponse {
                     VStack {
                         Text("Multiple response - Pick \(question.responseCount)")
@@ -212,7 +186,15 @@ struct TrainingQuestion: View {
             .padding()
         }
     }
+    
+    private func loadImage(from imagePath: String) -> UIImage? {
+        let fileManager = FileManager.default
+        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let imageURL = documentsURL.appendingPathComponent(imagePath)
+        return UIImage(contentsOfFile: imageURL.path)
+    }
 
+    
     private func adjustedFontSize(for text: String) -> CGFloat {
         _ = UIScreen.main.bounds.width - 32
         let fontSize = max(min(text.count / 80, 24), 14)
@@ -261,4 +243,5 @@ struct TrainingChoice: View {
             return .primary
         }
     }
+
 }
