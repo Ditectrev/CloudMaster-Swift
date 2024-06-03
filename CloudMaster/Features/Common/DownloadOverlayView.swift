@@ -1,16 +1,8 @@
-//
-//  DownloadView.swift
-//  Cloud-Master
-//
-//  Created by Benedikt Wagner on 24.05.24.
-//
-
-import Foundation
 import SwiftUI
 
 struct DownloadOverlayView: View {
     @Binding var isShowing: Bool
-    @Binding var progress: Double
+    @StateObject var viewModel: DownloadViewModel
 
     var body: some View {
         if isShowing {
@@ -18,9 +10,27 @@ struct DownloadOverlayView: View {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
 
-                CircularProgressView(progress: $progress)
-                    .frame(width: 250, height: 250)
-                    .shadow(radius: 10)
+                VStack {
+                    CircularProgressView(progress: $viewModel.overallProgress)
+                        .frame(width: 250, height: 250)
+                        .shadow(radius: 10)
+
+                    HStack {
+                        if viewModel.totalCourses > 1 {
+                               Text("\(viewModel.completedDownloads) / \(Int(viewModel.totalCourses)) courses")
+                                   .font(.headline)
+                                   .foregroundColor(.white)
+                                   .padding(.top, 10)
+                           }
+                    }
+                          
+                  Text(viewModel.statusMessage)
+                      .font(.subheadline)
+                      .bold()
+                      .foregroundColor(.white)
+                      .padding(.top, 5)
+                    
+                }
             }
         }
     }
@@ -39,7 +49,7 @@ struct CircularProgressView: View {
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
                 .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
-                .foregroundColor(Color.customPrimary)
+                .foregroundColor(Color.customAccent)
                 .rotationEffect(Angle(degrees: 270.0))
                 .animation(.linear, value: progress)
             
@@ -59,5 +69,3 @@ struct CircularProgressView: View {
         .padding(40)
     }
 }
-
-

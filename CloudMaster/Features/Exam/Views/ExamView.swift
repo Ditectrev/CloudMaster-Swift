@@ -25,82 +25,83 @@ struct ExamView: View {
     }
 
     var body: some View {
-            VStack {
-                if !questionLoader.questions.isEmpty {
-                    let questions = Array(questionLoader.questions.prefix(questionCount))
-                    if currentQuestionIndex < questions.count {
-                        HStack {
-                            Spacer()
-                            HStack {
-                                Spacer()
-                                Text("\(currentQuestionIndex + 1) of \(questionCount)")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                Spacer()
-                            }
-                            Spacer()
-                        }
-                        .padding(.horizontal)
-
-                        ExamQuestion(
-                            question: questions[currentQuestionIndex],
-                            selectedChoices: selectedChoices[questions[currentQuestionIndex].id] ?? [],
-                            isMultipleResponse: questions[currentQuestionIndex].multipleResponse,
-                            onChoiceSelected: { choiceId in
-                                if questions[currentQuestionIndex].multipleResponse {
-                                    if selectedChoices[questions[currentQuestionIndex].id]?.contains(choiceId) == true {
-                                        selectedChoices[questions[currentQuestionIndex].id]?.remove(choiceId)
-                                    } else {
-                                        selectedChoices[questions[currentQuestionIndex].id, default: []].insert(choiceId)
-                                    }
-                                } else {
-                                    selectedChoices[questions[currentQuestionIndex].id] = [choiceId]
-                                }
-                            }
-                        )
-
-                        Button(action: {
-                            if currentQuestionIndex < questions.count - 1 {
-                                currentQuestionIndex += 1
-                            } else {
-                                storeExamData(questions: questions)
-                                showSummary = true
-                            }
-                        }) {
-                            Text(currentQuestionIndex < questions.count - 1 ? "Next Question" : "Show Exam Result")
-                                .padding()
-                                .background(Color.customSecondary)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                        .padding()
-
+        VStack {
+            if !questionLoader.questions.isEmpty {
+                let questions = Array(questionLoader.questions.prefix(questionCount))
+                if currentQuestionIndex < questions.count {
+                    HStack {
                         Spacer()
-
                         HStack {
-                            Image(systemName: "timer")
-                            Text(timeFormatted(timeRemaining))
-                                .font(.headline)
+                            Spacer()
+                            Text("\(currentQuestionIndex + 1) of \(questionCount)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Spacer()
                         }
-                        .padding()
-                    } else {
-                        Text("Loading questions...")
+                        Spacer()
                     }
+                    .padding(.horizontal)
+
+                    ExamQuestion(
+                        question: questions[currentQuestionIndex],
+                        selectedChoices: selectedChoices[questions[currentQuestionIndex].id] ?? [],
+                        isMultipleResponse: questions[currentQuestionIndex].multipleResponse,
+                        onChoiceSelected: { choiceId in
+                            if questions[currentQuestionIndex].multipleResponse {
+                                if selectedChoices[questions[currentQuestionIndex].id]?.contains(choiceId) == true {
+                                    selectedChoices[questions[currentQuestionIndex].id]?.remove(choiceId)
+                                } else {
+                                    selectedChoices[questions[currentQuestionIndex].id, default: []].insert(choiceId)
+                                }
+                            } else {
+                                selectedChoices[questions[currentQuestionIndex].id] = [choiceId]
+                            }
+                        }
+                    )
+
+                    Button(action: {
+                        if currentQuestionIndex < questions.count - 1 {
+                            currentQuestionIndex += 1
+                        } else {
+                            storeExamData(questions: questions)
+                            showSummary = true
+                        }
+                    }) {
+                        Text(currentQuestionIndex < questions.count - 1 ? "Next Question" : "Show Exam Result")
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.customSecondary)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding(.horizontal, 20)
+
+                    Spacer()
+
+                    HStack {
+                        Image(systemName: "timer")
+                        Text(timeFormatted(timeRemaining))
+                            .font(.headline)
+                    }
+                    .padding()
                 } else {
                     Text("Loading questions...")
                 }
+            } else {
+                Text("Loading questions...")
             }
-            .onAppear(perform: startTimer)
-            .onDisappear {
-                if !showSummary {
-                    endExamIfNeeded()
-                }
+        }
+        .onAppear(perform: startTimer)
+        .onDisappear {
+            if !showSummary {
+                endExamIfNeeded()
             }
-            .sheet(isPresented: $showSummary) {
-                if let examData = lastExamData {
-                    ExamSummaryView(exam: examData)
-                }
+        }
+        .sheet(isPresented: $showSummary) {
+            if let examData = lastExamData {
+                ExamSummaryView(exam: examData)
             }
+        }
     }
 
     func startTimer() {
@@ -179,17 +180,29 @@ struct ExamQuestion: View {
                     .lineLimit(nil) // Allow text to wrap as needed
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal)
+                    .frame(alignment: .leading)
+                    .multilineTextAlignment(.center)
+                
+                if let imagePath = question.imagePath,
+                   let image = loadImage(from: imagePath) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .cornerRadius(2)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal)
+                }
 
                 if isMultipleResponse {
                     VStack {
                         Text("Multiple response - Pick \(question.responseCount)")
                             .font(.subheadline)
-                            .multilineTextAlignment(.center)  // Center the text
-                            .opacity(0.7)  // Set opacity to 70%
+                            .multilineTextAlignment(.center)
+                            .opacity(0.7)
                             .padding(.vertical, 5)
-                            .frame(minWidth: 0, maxWidth: .infinity)  // Use full width
+                            .frame(minWidth: 0, maxWidth: .infinity)
                     }
-                    .background(Color.gray.opacity(0.2))  // Light gray background to highlight the section
+                    .background(Color.gray.opacity(0.2))
                     .cornerRadius(10)
                     .padding(.horizontal)
                 }
@@ -200,6 +213,13 @@ struct ExamQuestion: View {
             }
             .padding()
         }
+    }
+
+    private func loadImage(from imagePath: String) -> UIImage? {
+        let fileManager = FileManager.default
+        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let imageURL = documentsURL.appendingPathComponent(imagePath)
+        return UIImage(contentsOfFile: imageURL.path)
     }
 
     private func adjustedFontSize(for text: String) -> CGFloat {
@@ -215,15 +235,19 @@ struct ExamChoice: View {
     let onChoiceSelected: (UUID) -> Void
 
     var body: some View {
-        Text(choice.text)
-            .padding()
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-            .background(isSelected ? Color.blue.opacity(0.3) : Color.clear)
-            .cornerRadius(10)
-            .onTapGesture {
-                onChoiceSelected(choice.id)
-            }
-            .multilineTextAlignment(.center)
+        Button(action: {
+            onChoiceSelected(choice.id)
+        }) {
+            Text(choice.text)
+                .padding()
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                .multilineTextAlignment(.center)
+        }
+        .background(isSelected ? Color.gray.opacity(0.3) : Color.clear)
+        .cornerRadius(10)
+        .padding(.horizontal)
+        .foregroundColor(.white)
+        
         Divider()
     }
 }
