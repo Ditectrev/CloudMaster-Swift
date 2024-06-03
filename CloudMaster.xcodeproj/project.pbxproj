@@ -11,19 +11,17 @@
 		8D8D8A902C05A23600ACC61C /* CloudMasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8A8F2C05A23600ACC61C /* CloudMasterUITests.swift */; };
 		8D8D8A922C05A23600ACC61C /* CloudMasterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8A912C05A23600ACC61C /* CloudMasterUITestsLaunchTests.swift */; };
 		8D8D8ACE2C05A27800ACC61C /* ConfirmPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8A9F2C05A27800ACC61C /* ConfirmPopup.swift */; };
-		8D8D8ACF2C05A27800ACC61C /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AA02C05A27800ACC61C /* DownloadView.swift */; };
+		8D8D8ACF2C05A27800ACC61C /* DownloadOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AA02C05A27800ACC61C /* DownloadOverlayView.swift */; };
 		8D8D8AD02C05A27800ACC61C /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AA12C05A27800ACC61C /* NotificationSettingsView.swift */; };
 		8D8D8AD12C05A27800ACC61C /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AA42C05A27800ACC61C /* CourseView.swift */; };
 		8D8D8AD22C05A27800ACC61C /* CoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AA72C05A27800ACC61C /* CoursesView.swift */; };
 		8D8D8AD32C05A27800ACC61C /* UserExamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AAA2C05A27800ACC61C /* UserExamData.swift */; };
 		8D8D8AD42C05A27800ACC61C /* ExamModesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AAD2C05A27800ACC61C /* ExamModesView.swift */; };
-		8D8D8AD52C05A27800ACC61C /* ExamQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AAE2C05A27800ACC61C /* ExamQuestion.swift */; };
 		8D8D8AD62C05A27800ACC61C /* ExamSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AAF2C05A27800ACC61C /* ExamSummaryView.swift */; };
 		8D8D8AD72C05A27800ACC61C /* ExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AB02C05A27800ACC61C /* ExamView.swift */; };
 		8D8D8AD82C05A27800ACC61C /* PreviousExamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AB12C05A27800ACC61C /* PreviousExamsView.swift */; };
 		8D8D8AD92C05A27800ACC61C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AB42C05A27800ACC61C /* HomeView.swift */; };
 		8D8D8ADA2C05A27800ACC61C /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AB72C05A27800ACC61C /* IntroView.swift */; };
-		8D8D8ADB2C05A27800ACC61C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AB82C05A27800ACC61C /* LoadingView.swift */; };
 		8D8D8ADC2C05A27800ACC61C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8ABB2C05A27800ACC61C /* SettingsView.swift */; };
 		8D8D8ADD2C05A27800ACC61C /* UserTrainingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8ABE2C05A27800ACC61C /* UserTrainingData.swift */; };
 		8D8D8ADE2C05A27800ACC61C /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC02C05A27800ACC61C /* TrainingView.swift */; };
@@ -42,6 +40,7 @@
 		8D8D8AF32C05A31D00ACC61C /* Icon.afpub in Resources */ = {isa = PBXBuildFile; fileRef = 8D8D8AED2C05A31C00ACC61C /* Icon.afpub */; };
 		8D8D8AF42C05A31D00ACC61C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D8D8AEE2C05A31C00ACC61C /* Icon.png */; };
 		8D8D8AF82C05A32B00ACC61C /* swift.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8D8D8AF52C05A32B00ACC61C /* swift.yml */; };
+		8DABB7742C0D7D0300B40E25 /* DownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABB7732C0D7D0300B40E25 /* DownloadViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,19 +68,17 @@
 		8D8D8A8F2C05A23600ACC61C /* CloudMasterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudMasterUITests.swift; sourceTree = "<group>"; };
 		8D8D8A912C05A23600ACC61C /* CloudMasterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudMasterUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8D8D8A9F2C05A27800ACC61C /* ConfirmPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPopup.swift; sourceTree = "<group>"; };
-		8D8D8AA02C05A27800ACC61C /* DownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
+		8D8D8AA02C05A27800ACC61C /* DownloadOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadOverlayView.swift; sourceTree = "<group>"; };
 		8D8D8AA12C05A27800ACC61C /* NotificationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		8D8D8AA42C05A27800ACC61C /* CourseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseView.swift; sourceTree = "<group>"; };
 		8D8D8AA72C05A27800ACC61C /* CoursesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesView.swift; sourceTree = "<group>"; };
 		8D8D8AAA2C05A27800ACC61C /* UserExamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserExamData.swift; sourceTree = "<group>"; };
 		8D8D8AAD2C05A27800ACC61C /* ExamModesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamModesView.swift; sourceTree = "<group>"; };
-		8D8D8AAE2C05A27800ACC61C /* ExamQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamQuestion.swift; sourceTree = "<group>"; };
 		8D8D8AAF2C05A27800ACC61C /* ExamSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamSummaryView.swift; sourceTree = "<group>"; };
 		8D8D8AB02C05A27800ACC61C /* ExamView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamView.swift; sourceTree = "<group>"; };
 		8D8D8AB12C05A27800ACC61C /* PreviousExamsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousExamsView.swift; sourceTree = "<group>"; };
 		8D8D8AB42C05A27800ACC61C /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8D8D8AB72C05A27800ACC61C /* IntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
-		8D8D8AB82C05A27800ACC61C /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8D8D8ABB2C05A27800ACC61C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8D8D8ABE2C05A27800ACC61C /* UserTrainingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTrainingData.swift; sourceTree = "<group>"; };
 		8D8D8AC02C05A27800ACC61C /* TrainingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
@@ -100,6 +97,7 @@
 		8D8D8AED2C05A31C00ACC61C /* Icon.afpub */ = {isa = PBXFileReference; lastKnownFileType = file; path = Icon.afpub; sourceTree = "<group>"; };
 		8D8D8AEE2C05A31C00ACC61C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		8D8D8AF52C05A32B00ACC61C /* swift.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swift.yml; sourceTree = "<group>"; };
+		8DABB7732C0D7D0300B40E25 /* DownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,8 +182,9 @@
 		8D8D8AA22C05A27800ACC61C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8DABB7722C0D7CF900B40E25 /* ViewModels */,
 				8D8D8A9F2C05A27800ACC61C /* ConfirmPopup.swift */,
-				8D8D8AA02C05A27800ACC61C /* DownloadView.swift */,
+				8D8D8AA02C05A27800ACC61C /* DownloadOverlayView.swift */,
 				8D8D8AA12C05A27800ACC61C /* NotificationSettingsView.swift */,
 			);
 			path = Common;
@@ -250,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				8D8D8AAD2C05A27800ACC61C /* ExamModesView.swift */,
-				8D8D8AAE2C05A27800ACC61C /* ExamQuestion.swift */,
 				8D8D8AAF2C05A27800ACC61C /* ExamSummaryView.swift */,
 				8D8D8AB02C05A27800ACC61C /* ExamView.swift */,
 				8D8D8AB12C05A27800ACC61C /* PreviousExamsView.swift */,
@@ -288,7 +286,6 @@
 			isa = PBXGroup;
 			children = (
 				8D8D8AB72C05A27800ACC61C /* IntroView.swift */,
-				8D8D8AB82C05A27800ACC61C /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -409,6 +406,14 @@
 				8D8D8AF62C05A32B00ACC61C /* workflows */,
 			);
 			path = .github;
+			sourceTree = "<group>";
+		};
+		8DABB7722C0D7CF900B40E25 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8DABB7732C0D7D0300B40E25 /* DownloadViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,7 +556,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D8D8ADC2C05A27800ACC61C /* SettingsView.swift in Sources */,
-				8D8D8AD52C05A27800ACC61C /* ExamQuestion.swift in Sources */,
 				8D8D8ADE2C05A27800ACC61C /* TrainingView.swift in Sources */,
 				8D8D8AD02C05A27800ACC61C /* NotificationSettingsView.swift in Sources */,
 				8D8D8AE22C05A27800ACC61C /* DownloadUtility.swift in Sources */,
@@ -560,8 +564,7 @@
 				8D8D8ADA2C05A27800ACC61C /* IntroView.swift in Sources */,
 				8D8D8AE02C05A27800ACC61C /* CloudMaster.swift in Sources */,
 				8D8D8ADD2C05A27800ACC61C /* UserTrainingData.swift in Sources */,
-				8D8D8ADB2C05A27800ACC61C /* LoadingView.swift in Sources */,
-				8D8D8ACF2C05A27800ACC61C /* DownloadView.swift in Sources */,
+				8D8D8ACF2C05A27800ACC61C /* DownloadOverlayView.swift in Sources */,
 				8D8D8AD32C05A27800ACC61C /* UserExamData.swift in Sources */,
 				8D8D8AD82C05A27800ACC61C /* PreviousExamsView.swift in Sources */,
 				8D8D8AE42C05A27800ACC61C /* QuestionLoader.swift in Sources */,
@@ -572,6 +575,7 @@
 				8D8D8AD42C05A27800ACC61C /* ExamModesView.swift in Sources */,
 				8D8D8AE12C05A27800ACC61C /* Courses.swift in Sources */,
 				8D8D8AD12C05A27800ACC61C /* CourseView.swift in Sources */,
+				8DABB7742C0D7D0300B40E25 /* DownloadViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,10 +737,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CloudMaster/Preview Content\"";
-				DEVELOPMENT_TEAM = 9D3QHQ7CMS;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "CloudMaster Swift";
@@ -752,6 +757,7 @@
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
 				PRODUCT_NAME = "CloudMaster Swift";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -766,10 +772,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CloudMaster/Preview Content\"";
-				DEVELOPMENT_TEAM = 9D3QHQ7CMS;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "CloudMaster Swift";
@@ -785,6 +792,7 @@
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
 				PRODUCT_NAME = "CloudMaster Swift";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
