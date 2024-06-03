@@ -3,8 +3,9 @@ import SwiftUI
 struct IntroView: View {
     @State private var currentPage = 0
     @State private var searchText = ""
-    @State private var showLoadingView = false
-    
+    @State private var showDownloadOverlayView = false
+    @StateObject private var viewModel = DownloadViewModel()
+
     @Binding var favorites: Set<Course>
     @Binding var isAppConfigured: Bool
 
@@ -18,14 +19,25 @@ struct IntroView: View {
                         }
                     }
                 } else {
-                    SecondPage(searchText: $searchText, favorites: $favorites, showLoadingView: $showLoadingView, isAppConfigured: $isAppConfigured)
+                    SecondPage(searchText: $searchText, favorites: $favorites, showDownloadOverlayView: $showDownloadOverlayView, isAppConfigured: $isAppConfigured)
                 }
             }
             .navigationBarHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .fullScreenCover(isPresented: $showLoadingView) {
-            LoadingView(favorites: $favorites, isSetupComplete: $isAppConfigured)
+        .fullScreenCover(isPresented: $showDownloadOverlayView) {
+            DownloadOverlayView(
+                isShowing: $showDownloadOverlayView,
+                viewModel: viewModel
+            )
+            .onAppear {
+                viewModel.downloadCourses(favorites)
+            }
+        }
+        .onChange(of: viewModel.downloadCompleted) { completed in
+            if completed {
+                isAppConfigured = true
+            }
         }
     }
 }
@@ -33,13 +45,11 @@ struct IntroView: View {
 struct FirstPage: View {
     let onNext: () -> Void
     @Environment(\.colorScheme) var colorScheme
-    
-   
 
     var body: some View {
         let isIpad = UIDevice.current.userInterfaceIdiom == .pad
         let imageSize: CGFloat = isIpad ? 300 : 200
-        
+
         VStack {
             Text("Welcome to CloudMaster")
                 .font(.largeTitle)
@@ -48,19 +58,19 @@ struct FirstPage: View {
                 .transition(.opacity)
                 .frame(alignment: .leading)
                 .multilineTextAlignment(.center)
-            
+
             Text("Improve your knowledge and get ready for exams")
                 .font(.subheadline)
                 .bold()
                 .padding(.bottom, 20)
-            
+
             Spacer()
-            
+
             Image(colorScheme == .dark ? "CM_white" : "CM_black")
                 .resizable()
                 .scaledToFit()
                 .frame(width: imageSize, height: imageSize)
-            
+
             Spacer()
 
             Button(action: onNext) {
@@ -75,11 +85,10 @@ struct FirstPage: View {
     }
 }
 
-
 struct SecondPage: View {
     @Binding var searchText: String
     @Binding var favorites: Set<Course>
-    @Binding var showLoadingView: Bool
+    @Binding var showDownloadOverlayView: Bool
     @Binding var isAppConfigured: Bool
 
     var body: some View {
@@ -92,7 +101,6 @@ struct SecondPage: View {
             Text("Select your courses to study")
                 .font(.subheadline)
                 .bold()
-            
 
             SearchBar(text: $searchText)
                 .padding()
@@ -111,7 +119,7 @@ struct SecondPage: View {
             Spacer()
 
             Button("Finish Setup") {
-                showLoadingView = true
+                showDownloadOverlayView = true
             }
             .foregroundColor(.white)
             .padding()
