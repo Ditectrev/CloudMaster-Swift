@@ -69,11 +69,12 @@ struct ExamView: View {
                     }) {
                         Text(currentQuestionIndex < questions.count - 1 ? "Next Question" : "Show Exam Result")
                             .padding()
+                            .frame(maxWidth: .infinity)
                             .background(Color.customSecondary)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-                    .padding()
+                    .padding(.horizontal, 20)
 
                     Spacer()
 
@@ -179,6 +180,8 @@ struct ExamQuestion: View {
                     .lineLimit(nil) // Allow text to wrap as needed
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal)
+                    .frame(alignment: .leading)
+                    .multilineTextAlignment(.center)
                 
                 if let imagePath = question.imagePath,
                    let image = loadImage(from: imagePath) {
@@ -232,15 +235,19 @@ struct ExamChoice: View {
     let onChoiceSelected: (UUID) -> Void
 
     var body: some View {
-        Text(choice.text)
-            .padding()
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-            .background(isSelected ? Color.blue.opacity(0.3) : Color.clear)
-            .cornerRadius(10)
-            .onTapGesture {
-                onChoiceSelected(choice.id)
-            }
-            .multilineTextAlignment(.center)
+        Button(action: {
+            onChoiceSelected(choice.id)
+        }) {
+            Text(choice.text)
+                .padding()
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                .multilineTextAlignment(.center)
+        }
+        .background(isSelected ? Color.gray.opacity(0.3) : Color.clear)
+        .cornerRadius(10)
+        .padding(.horizontal)
+        .foregroundColor(.white)
+        
         Divider()
     }
 }
