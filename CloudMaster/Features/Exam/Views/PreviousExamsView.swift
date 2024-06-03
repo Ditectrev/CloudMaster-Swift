@@ -6,7 +6,7 @@ struct PreviousExamsView: View {
     
     var body: some View {
         List(exams) { exam in
-            NavigationLink(destination: ExamSummaryView(exam: exam)) {
+            NavigationLink(destination: ExamSummaryView(exam: exam, afterExam: false)) {
                 HStack {
                     VStack(alignment: .leading) {
                         Text(exam.mode)

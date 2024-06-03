@@ -90,7 +90,7 @@ struct CourseView: View {
                         .padding()
                         .font(.subheadline)
 
-                    Link("Sources", destination: URL(string: course.url)!)
+                    Link("Sources", destination: URL(string: course.repositoryURL)!)
                         .padding()
                         .font(.subheadline)
                 }
