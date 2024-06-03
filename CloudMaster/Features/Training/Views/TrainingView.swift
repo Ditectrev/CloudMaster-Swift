@@ -47,17 +47,36 @@ struct TrainingView: View {
 
                 HStack(spacing: 20) {
                     if !showResult {
-                        Button(action: {
-                            showResult = true
-                            updateUserTrainingData(for: question)
-                        }) {
-                            Text("Show Result")
-                                .padding(10)
-                                .background(Color.customPrimary)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                    } else {
+                           if currentQuestionIndex > 0 {
+                               Button(action: {
+                                   currentQuestionIndex = max(currentQuestionIndex - 1, 0)
+                                   selectedChoices.removeAll()
+                                   showResult = false
+                                   startTime = Date()
+                               }) {
+                                   Text("Previous")
+                                       .padding(10)
+                                       .frame(maxWidth: .infinity)
+                                       .background(Color.customSecondary)
+                                       .foregroundColor(.white)
+                                       .cornerRadius(10)
+                               }
+                           } else {
+                               Spacer()
+                           }
+                           
+                           Button(action: {
+                               showResult = true
+                               updateUserTrainingData(for: question)
+                           }) {
+                               Text("Show Result")
+                                   .padding(10)
+                                   .frame(maxWidth: .infinity)
+                                   .background(Color.customPrimary)
+                                   .foregroundColor(.white)
+                                   .cornerRadius(10)
+                           }
+                       }  else {
                         Button(action: {
                             currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions
                             selectedChoices.removeAll()
@@ -66,6 +85,7 @@ struct TrainingView: View {
                         }) {
                             Text("Next Question")
                                 .padding(10)
+                                .frame(maxWidth: .infinity)
                                 .background(Color.customSecondary)
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
@@ -209,16 +229,19 @@ struct TrainingChoice: View {
     let onChoiceSelected: (UUID) -> Void
 
     var body: some View {
-        Text(choice.text)
-            .padding()
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-            .background(getChoiceBackgroundColor())
-            .foregroundColor(getChoiceTextColor())
-            .cornerRadius(10)
-            .onTapGesture {
-                onChoiceSelected(choice.id)
-            }
-            .multilineTextAlignment(.center)
+        Button(action: {
+            onChoiceSelected(choice.id)
+        }) {
+            Text(choice.text)
+                .padding()
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                .multilineTextAlignment(.center)
+        }
+        .background(getChoiceBackgroundColor())
+        .foregroundColor(getChoiceTextColor())
+        .cornerRadius(10)
+        .padding(.horizontal)
+        .disabled(isResultShown)
         
         Divider()
     }
@@ -243,5 +266,4 @@ struct TrainingChoice: View {
             return .primary
         }
     }
-
 }
