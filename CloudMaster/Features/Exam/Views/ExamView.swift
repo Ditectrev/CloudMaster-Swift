@@ -7,9 +7,10 @@ struct ExamView: View {
     @State private var currentQuestionIndex = 0
     @State private var selectedChoices: [UUID: Set<UUID>] = [:]
     @State private var timeRemaining: Int
-    @State private var showSummary = false
+    @State private var examFinished = false
     @State private var startTime: Date = Date()
     @State private var lastExamData: UserExamData? = nil
+    @State private var navigateToSummary = false
 
     let questionCount: Int
     let timeLimit: Int
@@ -25,56 +26,56 @@ struct ExamView: View {
     }
 
     var body: some View {
-        VStack {
-            if !questionLoader.questions.isEmpty {
-                let questions = Array(questionLoader.questions.prefix(questionCount))
-                if currentQuestionIndex < questions.count {
-                    HStack {
-                        Spacer()
+        NavigationStack {
+            VStack {
+                if !questionLoader.questions.isEmpty {
+                    let questions = Array(questionLoader.questions.prefix(questionCount))
+                    if currentQuestionIndex < questions.count {
                         HStack {
                             Spacer()
-                            Text("\(currentQuestionIndex + 1) of \(questionCount)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                            HStack {
+                                Spacer()
+                                Text("\(currentQuestionIndex + 1) of \(questionCount)")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                            }
                             Spacer()
                         }
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-
-                    ExamQuestion(
-                        question: questions[currentQuestionIndex],
-                        selectedChoices: selectedChoices[questions[currentQuestionIndex].id] ?? [],
-                        isMultipleResponse: questions[currentQuestionIndex].multipleResponse,
-                        onChoiceSelected: { choiceId in
-                            if questions[currentQuestionIndex].multipleResponse {
-                                if selectedChoices[questions[currentQuestionIndex].id]?.contains(choiceId) == true {
-                                    selectedChoices[questions[currentQuestionIndex].id]?.remove(choiceId)
+                        .padding(.horizontal)
+                        
+                        ExamQuestion(
+                            question: questions[currentQuestionIndex],
+                            selectedChoices: selectedChoices[questions[currentQuestionIndex].id] ?? [],
+                            isMultipleResponse: questions[currentQuestionIndex].multipleResponse,
+                            onChoiceSelected: { choiceId in
+                                if questions[currentQuestionIndex].multipleResponse {
+                                    if selectedChoices[questions[currentQuestionIndex].id]?.contains(choiceId) == true {
+                                        selectedChoices[questions[currentQuestionIndex].id]?.remove(choiceId)
+                                    } else {
+                                        selectedChoices[questions[currentQuestionIndex].id, default: []].insert(choiceId)
+                                    }
                                 } else {
-                                    selectedChoices[questions[currentQuestionIndex].id, default: []].insert(choiceId)
+                                    selectedChoices[questions[currentQuestionIndex].id] = [choiceId]
                                 }
-                            } else {
-                                selectedChoices[questions[currentQuestionIndex].id] = [choiceId]
                             }
+                        )
+                        Button(action: {
+                            if currentQuestionIndex < questions.count - 1 {
+                                currentQuestionIndex += 1
+                            } else {
+                                storeExamData(questions: questions)
+                                navigateToSummary = true
+                            }
+                        }) {
+                            Text(currentQuestionIndex < questions.count - 1 ? "Next Question" : "Show Exam Result")
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.customSecondary)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
-                    )
-
-                    Button(action: {
-                        if currentQuestionIndex < questions.count - 1 {
-                            currentQuestionIndex += 1
-                        } else {
-                            storeExamData(questions: questions)
-                            showSummary = true
-                        }
-                    }) {
-                        Text(currentQuestionIndex < questions.count - 1 ? "Next Question" : "Show Exam Result")
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.customSecondary)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
                     }
-                    .padding(.horizontal, 20)
 
                     Spacer()
 
@@ -85,21 +86,19 @@ struct ExamView: View {
                     }
                     .padding()
                 } else {
-                    Text("Loading questions...")
+                    Text("No que")
                 }
-            } else {
-                Text("Loading questions...")
+            }
+            .navigationDestination(isPresented: $navigateToSummary) {
+                if let examData = lastExamData {
+                    ExamSummaryView(exam: examData, afterExam: true)
+                }
             }
         }
         .onAppear(perform: startTimer)
         .onDisappear {
-            if !showSummary {
+            if !examFinished {
                 endExamIfNeeded()
-            }
-        }
-        .sheet(isPresented: $showSummary) {
-            if let examData = lastExamData {
-                ExamSummaryView(exam: examData)
             }
         }
     }
@@ -112,7 +111,7 @@ struct ExamView: View {
             } else {
                 timer.invalidate()
                 storeExamData(questions: Array(questionLoader.questions.prefix(questionCount)))
-                showSummary = true
+                navigateToSummary = true
             }
         }
     }
@@ -148,13 +147,14 @@ struct ExamView: View {
         
         UserExamDataStore.shared.saveExamData(examData)
         lastExamData = examData
+        examFinished = true
     }
 
     private func endExamIfNeeded() {
         if timeRemaining > 0 {
             timeRemaining = 0 // End the exam immediately
             storeExamData(questions: Array(questionLoader.questions.prefix(questionCount)))
-            showSummary = true
+            navigateToSummary = true
         }
     }
 

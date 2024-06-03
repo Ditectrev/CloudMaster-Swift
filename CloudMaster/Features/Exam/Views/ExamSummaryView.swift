@@ -1,12 +1,19 @@
 import Foundation
 import SwiftUI
 
+import Foundation
+import SwiftUI
+
 struct ExamSummaryView: View {
     @State private var expandedQuestionIDs: Set<UUID> = []
     @State private var showDeleteConfirmation = false
     
     @ObservedObject var examDataStore = UserExamDataStore.shared
+    
     let exam: UserExamData
+    
+    // Helper variable to hide backbutton after Exam
+    let afterExam: Bool
     
     var body: some View {
         VStack {
@@ -79,14 +86,17 @@ struct ExamSummaryView: View {
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(afterExam) // Hide back button based on the flag
         .toolbar {
-            ToolbarItem(placement: .principal) {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        showDeleteConfirmation = true
-                    }) {
-                        Image(systemName: "trash")
+            if (!afterExam){
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showDeleteConfirmation = true
+                        }) {
+                            Image(systemName: "trash")
+                        }
                     }
                 }
             }
