@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D26A31C2C0EA9C100E9B015 /* QuestionNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D26A31B2C0EA9C100E9B015 /* QuestionNavbar.swift */; };
 		8D8D8A862C05A23600ACC61C /* CloudMasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8A852C05A23600ACC61C /* CloudMasterTests.swift */; };
 		8D8D8A902C05A23600ACC61C /* CloudMasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8A8F2C05A23600ACC61C /* CloudMasterUITests.swift */; };
 		8D8D8A922C05A23600ACC61C /* CloudMasterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8A912C05A23600ACC61C /* CloudMasterUITestsLaunchTests.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D26A31B2C0EA9C100E9B015 /* QuestionNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionNavbar.swift; sourceTree = "<group>"; };
 		8D8D8A712C05A23400ACC61C /* CloudMaster Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CloudMaster Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D8D8A812C05A23600ACC61C /* CloudMasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudMasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D8D8A852C05A23600ACC61C /* CloudMasterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudMasterTests.swift; sourceTree = "<group>"; };
@@ -125,6 +127,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D26A3192C0EA9A400E9B015 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8D8D8A9F2C05A27800ACC61C /* ConfirmPopup.swift */,
+				8D26A31B2C0EA9C100E9B015 /* QuestionNavbar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		8D26A31A2C0EA9B300E9B015 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8D26A3192C0EA9A400E9B015 /* Components */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		8D8D8A682C05A23400ACC61C = {
 			isa = PBXGroup;
 			children = (
@@ -183,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				8DABB7722C0D7CF900B40E25 /* ViewModels */,
-				8D8D8A9F2C05A27800ACC61C /* ConfirmPopup.swift */,
 				8D8D8AA02C05A27800ACC61C /* DownloadOverlayView.swift */,
 				8D8D8AA12C05A27800ACC61C /* NotificationSettingsView.swift */,
 			);
@@ -342,6 +360,7 @@
 		8D8D8AC32C05A27800ACC61C /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				8D26A31A2C0EA9B300E9B015 /* Shared */,
 				8D8D8AA22C05A27800ACC61C /* Common */,
 				8D8D8AA62C05A27800ACC61C /* Course */,
 				8D8D8AA92C05A27800ACC61C /* Courses */,
@@ -574,6 +593,7 @@
 				8D8D8AD92C05A27800ACC61C /* HomeView.swift in Sources */,
 				8D8D8AD42C05A27800ACC61C /* ExamModesView.swift in Sources */,
 				8D8D8AE12C05A27800ACC61C /* Courses.swift in Sources */,
+				8D26A31C2C0EA9C100E9B015 /* QuestionNavbar.swift in Sources */,
 				8D8D8AD12C05A27800ACC61C /* CourseView.swift in Sources */,
 				8DABB7742C0D7D0300B40E25 /* DownloadViewModel.swift in Sources */,
 			);

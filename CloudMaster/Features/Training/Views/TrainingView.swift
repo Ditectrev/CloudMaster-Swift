@@ -20,7 +20,8 @@ struct TrainingView: View {
     var body: some View {
         ZStack {
             VStack {
-                Spacer(minLength: 50) // Add spacing to push content below the custom navigation bar
+                QuestionNavbar(currentQuestionIndex: currentQuestionIndex, totalQuestions: questionLoader.questions.count)
+                
                 if !questionLoader.questions.isEmpty {
                     let questions = Array(questionLoader.questions)
                     let totalQuestions = questions.count
@@ -95,30 +96,6 @@ struct TrainingView: View {
             }
             .onDisappear {
                 saveUserTrainingData()
-            }
-            
-            VStack {
-                HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                                .font(.title2)
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    Text("\(currentQuestionIndex + 1) of \(questionLoader.questions.count)")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    
-                    Spacer()
-                }
-                .padding()
-                Spacer()
             }
         }
     }
