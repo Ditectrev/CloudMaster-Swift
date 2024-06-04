@@ -1,9 +1,6 @@
 import Foundation
 import SwiftUI
 
-import Foundation
-import SwiftUI
-
 struct ExamSummaryView: View {
     @State private var expandedQuestionIDs: Set<UUID> = []
     @State private var showDeleteConfirmation = false
@@ -14,6 +11,8 @@ struct ExamSummaryView: View {
     
     // Helper variable to hide backbutton after Exam
     let afterExam: Bool
+    
+    @Environment(\.presentationMode) var presentationMode 
     
     var body: some View {
         VStack {
@@ -103,6 +102,7 @@ struct ExamSummaryView: View {
         }
         .confirmPopup(isPresented: $showDeleteConfirmation, title: "Delete Exam", message: "Are you sure you want to delete this exam?", confirmAction: {
             examDataStore.deleteExam(withId: exam.id)
+            presentationMode.wrappedValue.dismiss() // Dismiss the view after deletion
         })
     }
     
