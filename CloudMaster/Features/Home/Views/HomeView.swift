@@ -3,10 +3,11 @@ import SwiftUI
 struct HomeView: View {
     @Binding var favorites: Set<Course>
     
+    @Environment(\.colorScheme) var colorScheme
+    
     private var appVersion: String {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
-        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown"
-        return "Version \(version) (\(build))"
+        return "\(version)"
     }
 
 
@@ -50,6 +51,16 @@ struct HomeView: View {
                     .background(Color.customPrimary)
                     .cornerRadius(10)
                 }
+                .padding(.top, 10)
+                
+                Link(destination: URL(string: "https://github.com/Ditectrev/CloudMaster")!) {
+                    Image("githubIcon")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(colorScheme == .dark ? .gray : .black)
+                        .frame(width: 24, height: 24)
+                }
+                .padding(.bottom, 5)
                 
                 Text(appVersion)
                      .font(.footnote)
@@ -75,7 +86,6 @@ extension HomeView {
             Image(systemName: "gearshape")
         }
     }
-    
 }
 
 
