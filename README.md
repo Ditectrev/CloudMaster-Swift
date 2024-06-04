@@ -4,6 +4,11 @@
 
 CloudMaster Swift is a powerful iOS application designed to help you prepare for various cloud certification exams like AWS, GCP, and Azure. This app is a testament to the capabilities of modern AI language models like ChatGPT and Claude.AI, as it was developed solely with their assistance, without any prior Swift experience.
 
+<a href="https://apps.apple.com/nl/app/cloudmaster-swift/id6503601139" target="_blank">
+  <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store" height="40"/>
+</a>
+
+
 ## Personal Goal
 
 My goal with this project was to create an mobile application from scratch in a for me unknown languange and unknown IDE. Relying solely on the guidance provided by large language models like ChatGPT and Claude.AI i was able to create this Swift application within Xcode. This endeavor aimed to showcase the potential of these AI models in assisting developers, even those without prior experience in a particular language or framework.
