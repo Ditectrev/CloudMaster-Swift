@@ -6,21 +6,27 @@ struct Question: Identifiable, Codable {
     let choices: [Choice]
     var multipleResponse: Bool
     var responseCount: Int
-    let imagePath: String?
+    let images: [ImageInfo]
 
     enum CodingKeys: String, CodingKey {
-        case question, choices, multipleResponse = "multiple_response", responseCount = "response_count", imagePath = "imagePath"
+        case question, choices, multipleResponse = "multiple_response", responseCount = "response_count", images
     }
-    
+
+    struct ImageInfo: Codable {
+        let path: String
+        let url: String?
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         question = try container.decode(String.self, forKey: .question)
         choices = try container.decode([Choice].self, forKey: .choices)
         multipleResponse = try container.decodeIfPresent(Bool.self, forKey: .multipleResponse) ?? false
         responseCount = try container.decodeIfPresent(Int.self, forKey: .responseCount) ?? 0
-        imagePath = try container.decodeIfPresent(String.self, forKey: .imagePath)
+        images = try container.decodeIfPresent([ImageInfo].self, forKey: .images) ?? []
     }
 }
+
 
 struct Choice: Identifiable, Codable {
     var id = UUID()
