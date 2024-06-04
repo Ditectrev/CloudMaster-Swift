@@ -7,7 +7,7 @@ struct DownloadOverlayView: View {
     var body: some View {
         if isShowing {
             ZStack {
-                Color.black.opacity(0.4)
+                Color.black.opacity(0.8)
                     .edgesIgnoringSafeArea(.all)
 
                 VStack {
@@ -61,7 +61,7 @@ struct CircularProgressView: View {
                 withAnimation(.spring()) {
                     Image(systemName: "checkmark.circle.fill")
                         .resizable()
-                        .foregroundColor(Color.green)
+                        .foregroundColor(Color.correct)
                         .frame(width: 50, height: 50)
                 }
             }
