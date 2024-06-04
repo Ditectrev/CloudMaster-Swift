@@ -132,7 +132,6 @@ struct CourseView: View {
             }
         }) {
             Image(systemName: notificationsEnabled ? "bell.fill" : "bell")
-                .foregroundColor(notificationsEnabled ? Color.correct : .gray)
         }
     }
 

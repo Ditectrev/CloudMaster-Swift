@@ -18,93 +18,85 @@ struct TrainingView: View {
     }
 
     var body: some View {
-        VStack {
-            if !questionLoader.questions.isEmpty {
-                let questions = Array(questionLoader.questions)
-                let totalQuestions = questions.count
-
-                // Progress Header
-                HStack {
-                    Spacer()
-                    Text("\(currentQuestionIndex + 1) of \(totalQuestions)")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    Spacer()
-                }
-                .padding(.top)
-
-                let question = questions[currentQuestionIndex]
-
-                TrainingQuestion(
-                    question: question,
-                    selectedChoices: selectedChoices,
-                    isMultipleResponse: question.multipleResponse,
-                    isResultShown: showResult,
-                    onChoiceSelected: { choiceID in
-                        handleChoiceSelection(choiceID, question)
-                    }
-                )
-
-                HStack(spacing: 20) {
-                    if !showResult {
-                           if currentQuestionIndex > 0 {
-                               Button(action: {
-                                   currentQuestionIndex = max(currentQuestionIndex - 1, 0)
-                                   selectedChoices.removeAll()
-                                   showResult = false
-                                   startTime = Date()
-                               }) {
-                                   Text("Previous")
-                                       .padding(10)
-                                       .frame(maxWidth: .infinity)
-                                       .background(Color.customSecondary)
-                                       .foregroundColor(.white)
-                                       .cornerRadius(10)
-                               }
-                           } else {
-                               Spacer()
-                           }
-                           
-                           Button(action: {
-                               showResult = true
-                               updateUserTrainingData(for: question)
-                           }) {
-                               Text("Show Result")
-                                   .padding(10)
-                                   .frame(maxWidth: .infinity)
-                                   .background(Color.customPrimary)
-                                   .foregroundColor(.white)
-                                   .cornerRadius(10)
-                           }
-                       }  else {
-                        Button(action: {
-                            currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions
-                            selectedChoices.removeAll()
-                            showResult = false
-                            startTime = Date()
-                        }) {
-                            Text("Next Question")
-                                .padding(10)
-                                .frame(maxWidth: .infinity)
-                                .background(Color.customSecondary)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
+        ZStack {
+            VStack {
+                QuestionNavbar(currentQuestionIndex: currentQuestionIndex, totalQuestions: questionLoader.questions.count)
+                
+                if !questionLoader.questions.isEmpty {
+                    let questions = Array(questionLoader.questions)
+                    let totalQuestions = questions.count
+                    
+                    let question = questions[currentQuestionIndex]
+                    
+                    TrainingQuestion(
+                        question: question,
+                        selectedChoices: selectedChoices,
+                        isMultipleResponse: question.multipleResponse,
+                        isResultShown: showResult,
+                        onChoiceSelected: { choiceID in
+                            handleChoiceSelection(choiceID, question)
+                        }
+                    )
+                    
+                    HStack(spacing: 20) {
+                        if !showResult {
+                            if currentQuestionIndex > 0 {
+                                Button(action: {
+                                    currentQuestionIndex = max(currentQuestionIndex - 1, 0)
+                                    selectedChoices.removeAll()
+                                    showResult = false
+                                    startTime = Date()
+                                }) {
+                                    Text("Previous")
+                                        .padding(10)
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color.customSecondary)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(10)
+                                }
+                            }
+                            
+                            Button(action: {
+                                showResult = true
+                                updateUserTrainingData(for: question)
+                            }) {
+                                Text("Show Result")
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.customPrimary)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                            }
+                        } else {
+                            Button(action: {
+                                currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions
+                                selectedChoices.removeAll()
+                                showResult = false
+                                startTime = Date()
+                            }) {
+                                Text("Next Question")
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.customSecondary)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                            }
                         }
                     }
+                    .padding(.top)
+                } else {
+                    Text("No Questions available! Please download course")
                 }
-                .padding(.top)
-            } else {
-                Text("No Questions available! Please download course")
+                
+                Spacer()
             }
-
-            Spacer()
-        }
-        .navigationBarBackButtonHidden(false)
-        .onAppear {
-            startTime = Date()
-        }
-        .onDisappear {
-            saveUserTrainingData()
+            .navigationBarHidden(true)
+            .onAppear {
+                startTime = Date()
+            }
+            .onDisappear {
+                saveUserTrainingData()
+            }
         }
     }
 
@@ -170,6 +162,8 @@ struct TrainingQuestion: View {
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal)
+                    .multilineTextAlignment(.leading) // Justify the text
+                    .lineSpacing(2)
 
                 if let imagePath = question.imagePath,
                    let image = loadImage(from: imagePath) {
@@ -216,9 +210,15 @@ struct TrainingQuestion: View {
 
     
     private func adjustedFontSize(for text: String) -> CGFloat {
-        _ = UIScreen.main.bounds.width - 32
-        let fontSize = max(min(text.count / 80, 24), 14)
-        return CGFloat(fontSize)
+        let maxWidth = UIScreen.main.bounds.width - 32
+        let baseFontSize: CGFloat = 24
+        let minFontSize: CGFloat = 14
+
+        // Scale the font size based on the text length
+        let lengthFactor = CGFloat(text.count) / 100.0
+        let scaledFontSize = max(baseFontSize - lengthFactor, minFontSize)
+
+        return scaledFontSize
     }
 }
 

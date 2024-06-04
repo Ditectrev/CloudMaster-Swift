@@ -32,21 +32,6 @@ struct SettingsView: View {
                 alertAction?()
             })
             
-            Spacer()
-            
-            HStack {
-                Spacer()
-                Link(destination: URL(string: "https://github.com/your-repository-url")!) {
-                    HStack {
-                        Image(systemName: "link.circle")
-                        Text("View on GitHub")
-                    }
-                    .padding()
-                }
-                .foregroundColor(.blue)
-                Spacer()
-            }
-            .padding()
         }
     }
 
