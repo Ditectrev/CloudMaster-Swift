@@ -180,8 +180,8 @@ struct ExamQuestion: View {
                     .lineLimit(nil) // Allow text to wrap as needed
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal)
-                    .frame(alignment: .leading)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading) // Justify the text
+                    .lineSpacing(2)
                 
                 if let imagePath = question.imagePath,
                    let image = loadImage(from: imagePath) {
@@ -223,9 +223,15 @@ struct ExamQuestion: View {
     }
 
     private func adjustedFontSize(for text: String) -> CGFloat {
-        _ = UIScreen.main.bounds.width - 32 // Adjust for desired padding
-        let fontSize = max(min(text.count / 80, 24), 14) // Simplified dynamic font sizing
-        return CGFloat(fontSize)
+        let maxWidth = UIScreen.main.bounds.width - 32
+        let baseFontSize: CGFloat = 24
+        let minFontSize: CGFloat = 14
+
+        // Scale the font size based on the text length
+        let lengthFactor = CGFloat(text.count) / 100.0
+        let scaledFontSize = max(baseFontSize - lengthFactor, minFontSize)
+
+        return scaledFontSize
     }
 }
 
