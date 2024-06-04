@@ -44,10 +44,12 @@ struct ExamView: View {
                         }
                         .padding(.horizontal)
                         
-                        ExamQuestion(
+                        QuestionView(
+                            mode: .exam,
                             question: questions[currentQuestionIndex],
                             selectedChoices: selectedChoices[questions[currentQuestionIndex].id] ?? [],
                             isMultipleResponse: questions[currentQuestionIndex].multipleResponse,
+                            isResultShown: false, // Exam mode does not show result immediately
                             onChoiceSelected: { choiceId in
                                 if questions[currentQuestionIndex].multipleResponse {
                                     if selectedChoices[questions[currentQuestionIndex].id]?.contains(choiceId) == true {
@@ -60,6 +62,7 @@ struct ExamView: View {
                                 }
                             }
                         )
+                        
                         Button(action: {
                             if currentQuestionIndex < questions.count - 1 {
                                 currentQuestionIndex += 1
@@ -86,7 +89,7 @@ struct ExamView: View {
                     }
                     .padding()
                 } else {
-                    Text("No que")
+                    Text("No Questions available! Please download course")
                 }
             }
             .navigationDestination(isPresented: $navigateToSummary) {
@@ -162,98 +165,5 @@ struct ExamView: View {
         let minutes = totalSeconds / 60
         let seconds = totalSeconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
-    }
-}
-
-struct ExamQuestion: View {
-    let question: Question
-    let selectedChoices: Set<UUID>?
-    let isMultipleResponse: Bool
-    let onChoiceSelected: (UUID) -> Void
-
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text(question.question)
-                    .font(.system(size: adjustedFontSize(for: question.question), weight: .bold))
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(nil) // Allow text to wrap as needed
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.horizontal)
-                    .multilineTextAlignment(.leading) // Justify the text
-                    .lineSpacing(2)
-                
-                if let imagePath = question.imagePath,
-                   let image = loadImage(from: imagePath) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .cornerRadius(2)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal)
-                }
-
-                if isMultipleResponse {
-                    VStack {
-                        Text("Multiple response - Pick \(question.responseCount)")
-                            .font(.subheadline)
-                            .multilineTextAlignment(.center)
-                            .opacity(0.7)
-                            .padding(.vertical, 5)
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                    }
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                }
-
-                ForEach(question.choices) { choice in
-                    ExamChoice(choice: choice, isSelected: selectedChoices?.contains(choice.id) == true, onChoiceSelected: onChoiceSelected)
-                }
-            }
-            .padding()
-        }
-    }
-
-    private func loadImage(from imagePath: String) -> UIImage? {
-        let fileManager = FileManager.default
-        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let imageURL = documentsURL.appendingPathComponent(imagePath)
-        return UIImage(contentsOfFile: imageURL.path)
-    }
-
-    private func adjustedFontSize(for text: String) -> CGFloat {
-        let maxWidth = UIScreen.main.bounds.width - 32
-        let baseFontSize: CGFloat = 24
-        let minFontSize: CGFloat = 14
-
-        // Scale the font size based on the text length
-        let lengthFactor = CGFloat(text.count) / 100.0
-        let scaledFontSize = max(baseFontSize - lengthFactor, minFontSize)
-
-        return scaledFontSize
-    }
-}
-
-struct ExamChoice: View {
-    let choice: Choice
-    let isSelected: Bool
-    let onChoiceSelected: (UUID) -> Void
-
-    var body: some View {
-        Button(action: {
-            onChoiceSelected(choice.id)
-        }) {
-            Text(choice.text)
-                .padding()
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-                .multilineTextAlignment(.center)
-        }
-        .background(isSelected ? Color.gray.opacity(0.3) : Color.clear)
-        .cornerRadius(10)
-        .padding(.horizontal)
-        .foregroundColor(.white)
-        
-        Divider()
     }
 }
