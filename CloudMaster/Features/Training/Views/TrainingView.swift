@@ -28,7 +28,8 @@ struct TrainingView: View {
                     
                     let question = questions[currentQuestionIndex]
                     
-                    TrainingQuestion(
+                    QuestionView(
+                        mode: .training,
                         question: question,
                         selectedChoices: selectedChoices,
                         isMultipleResponse: question.multipleResponse,
@@ -113,24 +114,20 @@ struct TrainingView: View {
     }
 
     func updateUserTrainingData(for question: Question) {
-        // Update the time spent
         if let startTime = startTime {
             userTrainingData.timeSpent += Date().timeIntervalSince(startTime)
         }
 
-        // Update correct and wrong answers
         let correctChoices = Set(question.choices.filter { $0.correct }.map { $0.id })
         let userCorrectChoices = selectedChoices.intersection(correctChoices)
 
         userTrainingData.correctAnswers += userCorrectChoices.count
         userTrainingData.wrongAnswers += selectedChoices.subtracting(correctChoices).count
 
-        // Update question stats
         userTrainingData.updateStats(for: question.id, correctChoices: correctChoices, selectedChoices: selectedChoices)
     }
 
     func loadUserTrainingData(for course: Course) {
-        // Load the user training data for the specific course
         if let data = UserDefaults.standard.data(forKey: course.shortName) {
             if let decodedData = try? JSONDecoder().decode(UserTrainingData.self, from: data) {
                 userTrainingData = decodedData
@@ -139,131 +136,8 @@ struct TrainingView: View {
     }
 
     func saveUserTrainingData() {
-        // Save the user training data for the specific course
         if let data = try? JSONEncoder().encode(userTrainingData) {
             UserDefaults.standard.set(data, forKey: course.shortName)
-        }
-    }
-}
-
-struct TrainingQuestion: View {
-    let question: Question
-    let selectedChoices: Set<UUID>
-    let isMultipleResponse: Bool
-    let isResultShown: Bool
-    let onChoiceSelected: (UUID) -> Void
-
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text(question.question)
-                    .font(.system(size: adjustedFontSize(for: question.question), weight: .bold))
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.horizontal)
-                    .multilineTextAlignment(.leading) // Justify the text
-                    .lineSpacing(2)
-
-                if let imagePath = question.imagePath,
-                   let image = loadImage(from: imagePath) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .cornerRadius(2)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal)
-                }
-                if isMultipleResponse {
-                    VStack {
-                        Text("Multiple response - Pick \(question.responseCount)")
-                            .font(.subheadline)
-                            .multilineTextAlignment(.center)
-                            .opacity(0.7)
-                            .padding(.vertical, 5)
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                    }
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                }
-
-                ForEach(question.choices) { choice in
-                    TrainingChoice(
-                        choice: choice,
-                        isSelected: selectedChoices.contains(choice.id),
-                        isResultShown: isResultShown,
-                        onChoiceSelected: onChoiceSelected
-                    )
-                }
-            }
-            .padding()
-        }
-    }
-    
-    private func loadImage(from imagePath: String) -> UIImage? {
-        let fileManager = FileManager.default
-        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let imageURL = documentsURL.appendingPathComponent(imagePath)
-        return UIImage(contentsOfFile: imageURL.path)
-    }
-
-    
-    private func adjustedFontSize(for text: String) -> CGFloat {
-        let maxWidth = UIScreen.main.bounds.width - 32
-        let baseFontSize: CGFloat = 24
-        let minFontSize: CGFloat = 14
-
-        // Scale the font size based on the text length
-        let lengthFactor = CGFloat(text.count) / 100.0
-        let scaledFontSize = max(baseFontSize - lengthFactor, minFontSize)
-
-        return scaledFontSize
-    }
-}
-
-struct TrainingChoice: View {
-    let choice: Choice
-    let isSelected: Bool
-    let isResultShown: Bool
-    let onChoiceSelected: (UUID) -> Void
-
-    var body: some View {
-        Button(action: {
-            onChoiceSelected(choice.id)
-        }) {
-            Text(choice.text)
-                .padding()
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-                .multilineTextAlignment(.center)
-        }
-        .background(getChoiceBackgroundColor())
-        .foregroundColor(getChoiceTextColor())
-        .cornerRadius(10)
-        .padding(.horizontal)
-        .disabled(isResultShown)
-        
-        Divider()
-    }
-
-    private func getChoiceBackgroundColor() -> Color {
-        if isResultShown {
-            if choice.correct {
-                return Color.correct
-            } else if isSelected {
-                return Color.wrong
-            }
-        } else if isSelected {
-            return Color.gray.opacity(0.3)
-        }
-        return Color.clear
-    }
-
-    private func getChoiceTextColor() -> Color {
-        if isResultShown && choice.correct {
-            return .white
-        } else {
-            return .primary
         }
     }
 }
