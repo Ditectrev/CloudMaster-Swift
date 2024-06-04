@@ -90,7 +90,7 @@ struct CourseView: View {
                         .padding()
                         .font(.subheadline)
 
-                    Link("Sources", destination: URL(string: course.url)!)
+                    Link("Sources", destination: URL(string: course.repositoryURL)!)
                         .padding()
                         .font(.subheadline)
                 }
@@ -132,7 +132,6 @@ struct CourseView: View {
             }
         }) {
             Image(systemName: notificationsEnabled ? "bell.fill" : "bell")
-                .foregroundColor(notificationsEnabled ? Color.correct : .gray)
         }
     }
 

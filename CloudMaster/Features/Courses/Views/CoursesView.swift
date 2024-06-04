@@ -41,7 +41,8 @@ struct CoursesView: View {
             viewModel.downloadCourses(favorites)
         }) {
             Image(systemName: "arrow.down.circle")
+                .foregroundColor(viewModel.isDownloading ? .gray : .accentColor) // Change color based on state (optional)
         }
+        .disabled(viewModel.isDownloading)
     }
 }
-

@@ -6,7 +6,13 @@ struct ExamSummaryView: View {
     @State private var showDeleteConfirmation = false
     
     @ObservedObject var examDataStore = UserExamDataStore.shared
+    
     let exam: UserExamData
+    
+    // Helper variable to hide backbutton after Exam
+    let afterExam: Bool
+    
+    @Environment(\.presentationMode) var presentationMode 
     
     var body: some View {
         VStack {
@@ -79,20 +85,24 @@ struct ExamSummaryView: View {
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(afterExam) // Hide back button based on the flag
         .toolbar {
-            ToolbarItem(placement: .principal) {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        showDeleteConfirmation = true
-                    }) {
-                        Image(systemName: "trash")
+            if (!afterExam){
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showDeleteConfirmation = true
+                        }) {
+                            Image(systemName: "trash")
+                        }
                     }
                 }
             }
         }
         .confirmPopup(isPresented: $showDeleteConfirmation, title: "Delete Exam", message: "Are you sure you want to delete this exam?", confirmAction: {
             examDataStore.deleteExam(withId: exam.id)
+            presentationMode.wrappedValue.dismiss() // Dismiss the view after deletion
         })
     }
     

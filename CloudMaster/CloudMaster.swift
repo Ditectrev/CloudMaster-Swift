@@ -16,9 +16,6 @@ struct CloudMaster: App {
                 HomeView(favorites: $favorites)
             } else {
                 IntroView(favorites: $favorites, isAppConfigured: $isFirstStart)
-                    .onAppear {
-                        UserDefaults.standard.set(true, forKey: "isFirstStart")
-                    }
             }
         }
     }
