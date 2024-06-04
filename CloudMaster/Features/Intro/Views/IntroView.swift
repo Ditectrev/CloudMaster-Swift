@@ -50,19 +50,26 @@ struct FirstPage: View {
         let isIpad = UIDevice.current.userInterfaceIdiom == .pad
         let imageSize: CGFloat = isIpad ? 300 : 200
 
-        VStack {
-            Text("Welcome to CloudMaster")
-                .font(.largeTitle)
-                .bold()
-                .padding()
+        VStack() {
+            Text("WELCOME TO")
+                .font(.system(size: 24, weight: .light, design: .default))
+                .transition(.opacity)
+                .frame(alignment: .leading)
+                .multilineTextAlignment(.center)
+
+            Text("Cloudmaster")
+                .font(.system(size: 36, weight: .bold, design: .default))
                 .transition(.opacity)
                 .frame(alignment: .leading)
                 .multilineTextAlignment(.center)
 
             Text("Improve your knowledge and get ready for exams")
-                .font(.subheadline)
+                .font(.system(size: 18, weight: .light, design: .default))
                 .bold()
                 .padding(.bottom, 20)
+                .frame(alignment: .leading)
+                .multilineTextAlignment(.center)
+                .padding()
 
             Spacer()
 
@@ -93,14 +100,25 @@ struct SecondPage: View {
 
     var body: some View {
         VStack {
-            Text("Welcome to CloudMaster")
-                .font(.largeTitle)
-                .bold()
-                .padding()
+            Text("WELCOME TO")
+                .font(.system(size: 24, weight: .light, design: .default))
+                .transition(.opacity)
+                .frame(alignment: .leading)
+                .multilineTextAlignment(.center)
 
+            Text("Cloudmaster")
+                .font(.system(size: 36, weight: .bold, design: .default))
+                .transition(.opacity)
+                .frame(alignment: .leading)
+                .multilineTextAlignment(.center)
+            
             Text("Select your courses to study")
-                .font(.subheadline)
+                .font(.system(size: 18, weight: .light, design: .default))
                 .bold()
+                .padding(.bottom, 20)
+                .frame(alignment: .leading)
+                .multilineTextAlignment(.center)
+                .padding()
 
             SearchBar(text: $searchText)
                 .padding()
@@ -119,6 +137,7 @@ struct SecondPage: View {
             Spacer()
 
             Button("Finish Setup") {
+                UserDefaults.standard.set(true, forKey: "isFirstStart")
                 showDownloadOverlayView = true
             }
             .foregroundColor(.white)
