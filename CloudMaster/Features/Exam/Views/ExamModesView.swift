@@ -4,6 +4,8 @@ struct ExamModeView: View {
     let course: Course
     @ObservedObject var examDataStore = UserExamDataStore.shared
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         VStack {
             
@@ -68,12 +70,13 @@ struct ExamModeView: View {
             NavigationLink(destination: PreviousExamsView(exams: filteredExams)) {
                 HStack {
                     Image(systemName: "clock.arrow.circlepath")
+                        .font(.title3)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                     Text("Exam History")
+                        .font(.title3)
+                        .foregroundColor(filteredExams.isEmpty ? .gray : (colorScheme == .dark ? .white : .black))
                 }
                 .padding()
-                .background(filteredExams.isEmpty ? Color.customAccent : Color.customPrimary)
-                .foregroundColor(.white)
-                .cornerRadius(10)
             }
             .disabled(filteredExams.isEmpty)
         }

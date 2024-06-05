@@ -6,28 +6,31 @@ struct TrainingView: View {
     @State private var showResult = false
     @State private var userTrainingData = UserTrainingStore.shared.trainingData
     @State private var startTime: Date?
+    @State private var isBookmarked: Bool = false
     @Environment(\.presentationMode) var presentationMode
 
     let course: Course
-    @ObservedObject var questionLoader: QuestionLoader
+    @StateObject private var questionLoader: QuestionLoader
 
-    init(course: Course, questionLoader: QuestionLoader) {
+    init(course: Course) {
         self.course = course
-        self._questionLoader = ObservedObject(wrappedValue: questionLoader)
-        loadUserTrainingData(for: course)
+        _questionLoader = StateObject(wrappedValue: QuestionLoader(filename: course.shortName + ".json", intelligentLearning: false))
     }
 
     var body: some View {
         ZStack {
             VStack {
-                QuestionNavbar(currentQuestionIndex: currentQuestionIndex, totalQuestions: questionLoader.questions.count)
-                
                 if !questionLoader.questions.isEmpty {
                     let questions = Array(questionLoader.questions)
                     let totalQuestions = questions.count
-                    
                     let question = questions[currentQuestionIndex]
-                    
+
+                    QuestionNavbar(
+                        currentQuestionIndex: currentQuestionIndex,
+                        totalQuestions: questionLoader.questions.count,
+                        question: question,
+                        isBookmarked: $isBookmarked
+                    )
                     QuestionView(
                         mode: .training,
                         question: question,
@@ -38,15 +41,16 @@ struct TrainingView: View {
                             handleChoiceSelection(choiceID, question)
                         }
                     )
-                    
+                    .navigationBarItems(trailing: bookmarkButton)
+                    .onAppear {
+                        updateBookmarkState()
+                    }
+
                     HStack(spacing: 20) {
                         if !showResult {
                             if currentQuestionIndex > 0 {
                                 Button(action: {
-                                    currentQuestionIndex = max(currentQuestionIndex - 1, 0)
-                                    selectedChoices.removeAll()
-                                    showResult = false
-                                    startTime = Date()
+                                    showPreviousQuestion()
                                 }) {
                                     Text("Previous")
                                         .padding(10)
@@ -56,7 +60,7 @@ struct TrainingView: View {
                                         .cornerRadius(10)
                                 }
                             }
-                            
+
                             Button(action: {
                                 showResult = true
                                 updateUserTrainingData(for: question)
@@ -70,10 +74,7 @@ struct TrainingView: View {
                             }
                         } else {
                             Button(action: {
-                                currentQuestionIndex = (currentQuestionIndex + 1) % totalQuestions
-                                selectedChoices.removeAll()
-                                showResult = false
-                                startTime = Date()
+                                showNextQuestion()
                             }) {
                                 Text("Next Question")
                                     .padding(10)
@@ -88,17 +89,63 @@ struct TrainingView: View {
                 } else {
                     Text("No Questions available! Please download course")
                 }
-                
+
                 Spacer()
             }
             .navigationBarHidden(true)
             .onAppear {
                 startTime = Date()
+                updateBookmarkState() // Ensure bookmark state is updated when the view appears
             }
             .onDisappear {
                 saveUserTrainingData()
             }
         }
+    }
+
+    private var bookmarkButton: some View {
+        Button(action: {
+            toggleBookmark()
+        }) {
+            Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                .foregroundColor(isBookmarked ? .red : .blue)
+        }
+    }
+
+    private func showNextQuestion() {
+        if currentQuestionIndex < questionLoader.questions.count - 1 {
+            currentQuestionIndex += 1
+            selectedChoices.removeAll()
+            showResult = false
+            startTime = Date()
+            updateBookmarkState() // Update the bookmark state for the next question
+        }
+    }
+
+    private func showPreviousQuestion() {
+        if currentQuestionIndex > 0 {
+            currentQuestionIndex -= 1
+            selectedChoices.removeAll()
+            showResult = false
+            startTime = Date()
+            updateBookmarkState() // Update the bookmark state for the previous question
+        }
+    }
+
+    private func updateBookmarkState() {
+        let currentQuestion = questionLoader.questions[currentQuestionIndex]
+        isBookmarked = FavoritesStorage.shared.isBookmarked(currentQuestion)
+    }
+
+    private func toggleBookmark() {
+        let currentQuestion = questionLoader.questions[currentQuestionIndex]
+        if isBookmarked {
+            FavoritesStorage.shared.removeBookmarkByQuestionText(currentQuestion.question)
+        } else {
+            let newBookmark = Bookmark(id: UUID(), question: currentQuestion, answer: currentQuestion.choices)
+            FavoritesStorage.shared.addBookmark(newBookmark)
+        }
+        isBookmarked.toggle()
     }
 
     func handleChoiceSelection(_ choiceID: UUID, _ question: Question) {
