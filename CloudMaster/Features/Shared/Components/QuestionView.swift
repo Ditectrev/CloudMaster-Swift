@@ -1,10 +1,3 @@
-//
-//  QuestionView.swift
-//  CloudMaster
-//
-//  Created by Benedikt Wagner on 04.06.24.
-//
-
 import Foundation
 import SwiftUI
 
@@ -12,6 +5,7 @@ struct QuestionView: View {
     enum Mode {
         case training
         case exam
+        case bookmarked
     }
 
     let mode: Mode
@@ -67,11 +61,16 @@ struct QuestionView: View {
                             isResultShown: isResultShown ?? false,
                             onChoiceSelected: onChoiceSelected
                         )
-                    } else {
+                    } else if mode == .exam {
                         ExamChoice(
                             choice: choice,
                             isSelected: selectedChoices?.contains(choice.id) == true,
                             onChoiceSelected: onChoiceSelected
+                        )
+                    } else if mode == .bookmarked {
+                        BookmarkedChoice(
+                            choice: choice,
+                            isSelected: selectedChoices?.contains(choice.id) == true
                         )
                     }
                 }
@@ -163,7 +162,24 @@ struct ExamChoice: View {
         .background(isSelected ? Color.gray.opacity(0.3) : Color.clear)
         .cornerRadius(10)
         .padding(.horizontal)
-        .foregroundColor(.white)
+        
+        Divider()
+    }
+}
+
+struct BookmarkedChoice: View {
+    let choice: Choice
+    let isSelected: Bool
+
+    var body: some View {
+        Text(choice.text)
+            .padding()
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+            .multilineTextAlignment(.center)
+            .background(choice.correct ? Color.correct : (isSelected ? Color.wrong : Color.gray.opacity(0.3)))
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .padding(.horizontal)
         
         Divider()
     }
