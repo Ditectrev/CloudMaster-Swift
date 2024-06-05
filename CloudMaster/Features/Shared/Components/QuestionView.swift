@@ -162,7 +162,6 @@ struct ExamChoice: View {
         .background(isSelected ? Color.gray.opacity(0.3) : Color.clear)
         .cornerRadius(10)
         .padding(.horizontal)
-        .foregroundColor(.white)
         
         Divider()
     }
