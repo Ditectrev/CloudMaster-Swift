@@ -1,14 +1,17 @@
 import SwiftUI
-
 struct CourseView: View {
     @State private var isLoading = false
     @State private var downloadProgress: [Course: Progress] = [:]
     @State private var userTrainingData = UserTrainingData()
     @State private var showingNotificationSettings = false
     @State private var notificationsEnabled = false
+    @State private var showingInfoPopup = false
+    
     @StateObject private var viewModel = DownloadViewModel()
     @StateObject private var questionLoader: QuestionLoader
 
+    @Environment(\.colorScheme) var colorScheme
+    
     let course: Course
 
     init(course: Course) {
@@ -41,7 +44,7 @@ struct CourseView: View {
 
                 Spacer()
                 VStack(spacing: 20) {
-                    NavigationLink(destination: TrainingView(course: course, questionLoader: questionLoader)) {
+                    NavigationLink(destination: TrainingView(course: course)) {
                         VStack {
                             Text("Training")
                                 .font(.title)
@@ -55,7 +58,7 @@ struct CourseView: View {
                         .cornerRadius(10)
                     }
 
-                    NavigationLink(destination: TrainingView(course: course, questionLoader: questionLoader)) {
+                    NavigationLink(destination: TrainingView(course: course)) {
                         VStack {
                             Text("Intelligent Training")
                                 .font(.title)
@@ -85,14 +88,16 @@ struct CourseView: View {
                 }
                 Spacer()
 
-                HStack(spacing: 20) {
-                    Link("Certification", destination: URL(string: course.url)!)
-                        .padding()
-                        .font(.subheadline)
-
-                    Link("Sources", destination: URL(string: course.repositoryURL)!)
-                        .padding()
-                        .font(.subheadline)
+                NavigationLink(destination: BookmarksView()) {
+                    HStack {
+                        Image(systemName: "bookmark")
+                            .font(.title3)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                        Text("Bookmarks")
+                            .font(.title3)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                    }
+                    .cornerRadius(10)
                 }
             }
             .onAppear {
@@ -104,13 +109,19 @@ struct CourseView: View {
             }
         }
         .navigationBarTitle(course.shortName, displayMode: .inline)
-        .navigationBarItems(trailing: notificationButton)
+        .navigationBarItems(trailing: HStack {
+            notificationButton
+            infoButton
+        })
         .navigationBarBackButtonHidden(false)
         .sheet(isPresented: $showingNotificationSettings) {
             NotificationSettingsView(isPresented: $showingNotificationSettings, notificationsEnabled: $notificationsEnabled, course: course)
                 .onDisappear {
                     checkNotificationSettings()
                 }
+        }
+        .sheet(isPresented: $showingInfoPopup) {
+            CourseInformationPopup(course: course)
         }
         .overlay(
             DownloadOverlayView(
@@ -132,6 +143,14 @@ struct CourseView: View {
             }
         }) {
             Image(systemName: notificationsEnabled ? "bell.fill" : "bell")
+        }
+    }
+
+    private var infoButton: some View {
+        Button(action: {
+            showingInfoPopup = true
+        }) {
+            Image(systemName: "info.circle")
         }
     }
 
@@ -163,7 +182,7 @@ struct CourseView: View {
     func downloadCourse() {
         viewModel.downloadCourse(course)
         viewModel.$isDownloading.sink { isDownloading in
-            if !isDownloading {
+            if (!isDownloading) {
                 DispatchQueue.main.async {
                     questionLoader.reloadQuestions(from: course.shortName + ".json")
                 }
@@ -180,4 +199,40 @@ struct CourseView: View {
         }
         .store(in: &viewModel.cancellables)
     }
+}
+
+struct CourseInformationPopup: View {
+    let course: Course
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Course information")
+                .font(.title2)
+                .multilineTextAlignment(.center)
+            
+            VStack(spacing: 10) {
+                HStack {
+                    Spacer()
+                    Image(systemName: "book.pages.fill")
+                    Text("Certification")
+                    Spacer()
+                }
+                Link(course.url, destination: URL(string: course.url)!)
+            }
+            
+            VStack(spacing: 10) {
+                HStack {
+                    Spacer()
+                    Image(systemName: "link")
+                    Text("Sources")
+                    Spacer()
+                }
+                Link(course.repositoryURL, destination: URL(string: course.repositoryURL)!)
+            }
+            
+            Spacer()
+        }
+        .padding()
+    }
+
 }
