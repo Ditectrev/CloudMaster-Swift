@@ -8,20 +8,7 @@ struct CoursesView: View {
 
     var body: some View {
         VStack {
-            SearchBar(text: $searchText)
-                .padding()
-
-            List(Course.allCourses.filter({ searchText.isEmpty ? true : $0.fullName.lowercased().contains(searchText.lowercased()) })) { course in
-                CourseRow(course: course, isBookmarked: favorites.contains(course)) {
-                    if favorites.contains(course) {
-                        favorites.remove(course)
-                    } else {
-                        favorites.insert(course)
-                    }
-                    FavoritesStorage.shared.saveFavorites(favorites)
-                }
-            }
-            .listStyle(PlainListStyle())
+            AllCourses(favorites: $favorites)
         }
         .navigationBarTitle("All Courses", displayMode: .inline)
         .navigationBarItems(trailing: updateButton)

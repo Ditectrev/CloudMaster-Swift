@@ -88,7 +88,6 @@ extension HomeView {
     }
 }
 
-
 struct StyledCourseRow: View {
     let course: Course
 
@@ -105,11 +104,13 @@ struct StyledCourseRow: View {
                     .font(.headline)
                 Text(course.fullName)
                     .font(.subheadline)
+                    .lineLimit(1) // Ensure the text doesn't exceed one line
             }
 
             Spacer()
         }
         .padding()
+        .frame(height: 60) // Set a fixed height for the row
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(gradientForCompany(course.company), lineWidth: 2)
@@ -125,6 +126,8 @@ struct StyledCourseRow: View {
             return "azureIcon"
         case .gcp:
             return "gcpIcon"
+        case .other:
+            return "otherIcon"
         }
     }
 
@@ -138,7 +141,11 @@ struct StyledCourseRow: View {
             return LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .leading, endPoint: .trailing)
         case .gcp:
             return LinearGradient(gradient: Gradient(colors: [.red, .green, .yellow, .blue]), startPoint: .leading, endPoint: .trailing)
+        case .other:
+            let color1 = Color.purple
+            let color2 = Color.pink
+            let color3 = Color.orange
+            return LinearGradient(gradient: Gradient(colors: [color1, color2, color3]), startPoint: .leading, endPoint: .trailing)
         }
     }
 }
-
