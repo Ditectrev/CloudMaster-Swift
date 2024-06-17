@@ -4,6 +4,7 @@ enum CourseCompany: String, Codable, Hashable, CaseIterable {
     case aws = "Amazon Web Services"
     case azure = "Microsoft Azure"
     case gcp = "Google Cloud Platform"
+    case other = "Others"
 }
 
 
@@ -62,7 +63,7 @@ struct Course: Codable, Hashable, Identifiable {
 extension Course {
     static let allCourses = [
         Course(
-            fullName: "AWS Certified Advanced Networking Specialty",
+            fullName: "Certified Advanced Networking Specialty",
             shortName: "ANS-C01",
             description: "Validates expertise in designing and maintaining AWS network architecture, including hybrid IT, routing, and security.",
             company: .aws,
@@ -77,22 +78,7 @@ extension Course {
             lastUpdate: nil
         ),
         Course(
-            fullName: "AWS Certified Solutions Architect Associate",
-            shortName: "SAA-C03",
-            description: "Covers designing and deploying scalable, highly available, and fault-tolerant systems on AWS.",
-            company: .aws,
-            repositoryURL: "https://github.com/Ditectrev/AWS-Certified-Solutions-Architect-Associate-SAA-C03-Practice-Tests-Exams-Questions-Answers",
-            questionURL: "https://raw.githubusercontent.com/Ditectrev/AWS-Certified-Solutions-Architect-Associate-SAA-C03-Practice-Tests-Exams-Questions-Answers/main/README.md",
-            url: "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
-            exam: Exam(
-                quick: ExamDetail(time: 40, questionCount: 20),
-                intermediate: ExamDetail(time: 84, questionCount: 49),
-                real: ExamDetail(time: 120, questionCount: 65)
-            ),
-            lastUpdate: nil
-        ),
-        Course(
-            fullName: "AWS Certified Cloud Practitioner",
+            fullName: "Certified Cloud Practitioner",
             shortName: "CLF-C02",
             description: "Provides a foundational understanding of AWS cloud concepts, services, security, architecture, pricing, and support.",
             company: .aws,
@@ -103,6 +89,97 @@ extension Course {
                 quick: ExamDetail(time: 30, questionCount: 20),
                 intermediate: ExamDetail(time: 42, questionCount: 42),
                 real: ExamDetail(time: 90, questionCount: 65)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Certified Data Analytics",
+            shortName: "DAS-C01",
+            description: "Validates expertise in designing, building, securing, and maintaining analytics solutions on AWS, demonstrating advanced skills in using AWS data lakes, analytics services, and visualization tools.",
+            company: .aws,
+            repositoryURL: "https://github.com/Ditectrev/Amazon-Web-Services-Certified-AWS-Certified-Data-Analytics-DAS-C01-Practice-Tests-Exams-Question",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/Amazon-Web-Services-Certified-AWS-Certified-Data-Analytics-DAS-C01-Practice-Tests-Exams-Question/main/README.md",
+            url: "https://aws.amazon.com/training/learn-about/data-analytics/",
+            exam: Exam(
+                quick: ExamDetail(time: 57, questionCount: 22),
+                intermediate: ExamDetail(time: 119, questionCount: 46),
+                real: ExamDetail(time: 170, questionCount: 65)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Certified Database Specialty",
+            shortName: "DBS-C01",
+            description: "Validates expertise in designing, managing, and securing AWS database solutions, demonstrating advanced knowledge of various database services and architectures on the AWS platform.",
+            company: .aws,
+            repositoryURL:"https://github.com/Ditectrev/Amazon-Web-Services-Certified-AWS-Certified-Database-DBS-C01-Practice-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/Amazon-Web-Services-Certified-AWS-Certified-Database-DBS-C01-Practice-Tests-Exams-Questions-Answers/main/README.md",
+            url: "https://aws.amazon.com/training/classroom/exam-readiness-aws-certified-database-specialty/",
+            exam: Exam(
+                quick: ExamDetail(time: 57, questionCount: 22),
+                intermediate: ExamDetail(time: 119, questionCount: 46),
+                real: ExamDetail(time: 170, questionCount: 65)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Certified Developer Associate",
+            shortName: "DVA-C02",
+            description: "Validates proficiency in developing, deploying, and debugging applications on the AWS cloud, demonstrating a strong understanding of core AWS services, architecture, and best practices.",
+            company: .aws,
+            repositoryURL: "https://github.com/Ditectrev/Amazon-Web-Services-AWS-Developer-Associate-DVA-C02-Practice-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/Amazon-Web-Services-AWS-Developer-Associate-DVA-C02-Practice-Tests-Exams-Questions-Answers/main/README.md",
+            url: "https://aws.amazon.com/certification/certified-developer-associate/",
+            exam: Exam(
+                quick: ExamDetail(time: 57, questionCount: 22),
+                intermediate: ExamDetail(time: 119, questionCount: 46),
+                real: ExamDetail(time: 170, questionCount: 65)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Certified Machine Learning Specialty",
+            shortName: "MLS-C01",
+            description: "Validates proficiency in developing, deploying, and debugging applications on the AWS cloud, demonstrating a strong understanding of core AWS services, architecture, and best practices.",
+            company: .aws,
+            repositoryURL: "https://github.com/Ditectrev/Amazon-Web-Services-Certified-AWS-Certified-Machine-Learning-MLS-C01-Practice-Tests-Exams-Question",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/Amazon-Web-Services-Certified-AWS-Certified-Machine-Learning-MLS-C01-Practice-Tests-Exams-Question/main/README.md",
+            url: "https://aws.amazon.com/certification/certified-machine-learning-specialty/",
+            exam: Exam(
+                quick: ExamDetail(time: 57, questionCount: 22),
+                intermediate: ExamDetail(time: 119, questionCount: 46),
+                real: ExamDetail(time: 170, questionCount: 65)
+            ),
+            lastUpdate: nil
+        ),
+
+        Course(
+            fullName: "Certified Security Specialty",
+            shortName: "SCS-C02",
+            description: "Validates advanced expertise in securing and managing AWS environments, demonstrating comprehensive knowledge of security best practices, compliance, identity and access management, incident response, and data protection on the AWS platform.",
+            company: .aws,
+            repositoryURL: "https://github.com/Ditectrev/Amazon-Web-Services-Certified-AWS-Certified-Security-SCS-C02-Practice-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/Amazon-Web-Services-Certified-AWS-Certified-Security-SCS-C02-Practice-Tests-Exams-Questions-Answers/main/README.md",
+            url: "https://aws.amazon.com/certification/certified-security-specialty/",
+            exam: Exam(
+                quick: ExamDetail(time: 57, questionCount: 22),
+                intermediate: ExamDetail(time: 119, questionCount: 46),
+                real: ExamDetail(time: 170, questionCount: 65)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Certified Solutions Architect Associate",
+            shortName: "SAA-C03",
+            description: "Covers designing and deploying scalable, highly available, and fault-tolerant systems on AWS.",
+            company: .aws,
+            repositoryURL: "https://github.com/Ditectrev/AWS-Certified-Solutions-Architect-Associate-SAA-C03-Practice-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/AWS-Certified-Solutions-Architect-Associate-SAA-C03-Practice-Tests-Exams-Questions-Answers/main/README.md",
+            url: "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 49),
+                real: ExamDetail(time: 120, questionCount: 65)
             ),
             lastUpdate: nil
         ),
@@ -218,6 +295,81 @@ extension Course {
             repositoryURL: "https://github.com/Ditectrev/Google-Cloud-Platform-GCP-Associate-Cloud-Engineer-Practice-Tests-Exams-Questions-Answers",
             questionURL: "https://raw.githubusercontent.com/Ditectrev/Google-Cloud-Platform-GCP-Associate-Cloud-Engineer-Practice-Tests-Exams-Questions-Answers/main/README.md",
             url: "https://cloud.google.com/certification/cloud-engineer",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 42),
+                real: ExamDetail(time: 120, questionCount: 60)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "IT Service Management 4",
+            shortName: "ITL-4",
+            description: "Entry-level certification that demonstrates an understanding of the core concepts and principles of IT Service Management based on the ITIL 4 framework.",
+            company: .other,
+            repositoryURL: "https://github.com/Ditectrev/ITIL-4-Foundation-IT-Service-Management-Practice-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/ITIL-4-Foundation-IT-Service-Management-Practice-Tests-Exams-Questions-Answers/main/README.md",
+            url: "https://www.axelos.com/certifications/itil-service-management/",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 42),
+                real: ExamDetail(time: 120, questionCount: 60)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Prince 2 - Agile Foundation",
+            shortName: "Prince 2",
+            description: "The PRINCE2 Agile Foundation Certificate validates an individual’s knowledge of how to apply the PRINCE2 project management methodology in an agile environment.",
+            company: .other,
+            repositoryURL:"https://github.com/Ditectrev/PRINCE2-Agile-Foundation-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/PRINCE2-Agile-Foundation-Tests-Exams-Questions-Answers/main/README.md",
+            url: "https://www.axelos.com/certifications/propath/prince2-agile-project-management/prince2-agile-foundation",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 42),
+                real: ExamDetail(time: 120, questionCount: 60)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Scrum Developer I",
+            shortName: "SD-1",
+            description: "Verifies a developer’s understanding of Scrum principles and their ability to work effectively within a Scrum team, focusing on collaborative and incremental software development practices.",
+            company: .other,
+            repositoryURL:"https://github.com/Ditectrev/Professional-Scrum-Developer-I-PSD-I-Practice-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/Professional-Scrum-Developer-I-PSD-I-Practice-Tests-Exams-Questions-Answers/master/README.md",
+            url: "https://www.scrum.org/assessments/professional-scrum-developer-certification",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 42),
+                real: ExamDetail(time: 120, questionCount: 60)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Scrum Master I",
+            shortName: "SM-1",
+            description: "Demonstrates advanced proficiency in facilitating and leading Scrum teams, emphasizing the application of Scrum practices, principles, and techniques to maximize team productivity and efficiency.",
+            company: .other,
+            repositoryURL: "https://github.com/Ditectrev/Professional-Scrum-Master-I-PSM-I-Practice-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/Professional-Scrum-Master-I-PSM-I-Practice-Tests-Exams-Questions-Answers/main/README.md",
+            url: "https://www.scrum.org/assessments/professional-scrum-master-i-certification",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 42),
+                real: ExamDetail(time: 120, questionCount: 60)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Scrum Master II",
+            shortName: "SM-2",
+            description: "Demonstrates advanced proficiency in facilitating and leading Scrum teams, emphasizing the application of Scrum practices, principles, and techniques to maximize team productivity and efficiency.",
+            company: .other,
+            repositoryURL:"https://github.com/Ditectrev/Professional-Scrum-Master-II-PSM-II-Practice-Tests-Exams-Questions-Answers",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/Professional-Scrum-Master-II-PSM-II-Practice-Tests-Exams-Questions-Answers/main/README.md",
+            url: "https://www.scrum.org/assessments/professional-scrum-master-ii-certification",
             exam: Exam(
                 quick: ExamDetail(time: 40, questionCount: 20),
                 intermediate: ExamDetail(time: 84, questionCount: 42),
