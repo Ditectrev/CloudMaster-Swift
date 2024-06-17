@@ -318,8 +318,8 @@ extension Course {
             lastUpdate: nil
         ),
         Course(
-            fullName: "Prince 2 - Agile Foundation",
-            shortName: "Prince 2",
+            fullName: "Agile Foundation",
+            shortName: "Prince-2",
             description: "The PRINCE2 Agile Foundation Certificate validates an individual’s knowledge of how to apply the PRINCE2 project management methodology in an agile environment.",
             company: .other,
             repositoryURL:"https://github.com/Ditectrev/PRINCE2-Agile-Foundation-Tests-Exams-Questions-Answers",
@@ -334,10 +334,10 @@ extension Course {
         ),
         Course(
             fullName: "Scrum Developer I",
-            shortName: "SD-1",
+            shortName: "PSD-1",
             description: "Verifies a developer’s understanding of Scrum principles and their ability to work effectively within a Scrum team, focusing on collaborative and incremental software development practices.",
             company: .other,
-            repositoryURL:"https://github.com/Ditectrev/Professional-Scrum-Developer-I-PSD-I-Practice-Tests-Exams-Questions-Answers",
+            repositoryURL: "https://github.com/Ditectrev/Professional-Scrum-Developer-I-PSD-I-Practice-Tests-Exams-Questions-Answers",
             questionURL: "https://raw.githubusercontent.com/Ditectrev/Professional-Scrum-Developer-I-PSD-I-Practice-Tests-Exams-Questions-Answers/master/README.md",
             url: "https://www.scrum.org/assessments/professional-scrum-developer-certification",
             exam: Exam(
