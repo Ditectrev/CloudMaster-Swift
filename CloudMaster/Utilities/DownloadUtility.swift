@@ -147,49 +147,64 @@ class DownloadUtility {
     }
 
     private static func downloadImages(for questions: [[String: Any]], course: Course, progressHandler: @escaping (Int, Int) -> Void) throws -> [[String: Any]] {
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let imagesDirectoryURL = documentsURL.appendingPathComponent("images/\(course.shortName)")
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let imagesDirectoryURL = documentsURL.appendingPathComponent("images/\(course.shortName)")
 
-        try FileManager.default.createDirectory(at: imagesDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: imagesDirectoryURL, withIntermediateDirectories: true, attributes: nil)
 
-        var updatedQuestions = questions
+            var updatedQuestions = questions
 
-        let totalImages = questions.reduce(0) { count, question in
-            count + ((question["images"] as? [[String: Any]])?.count ?? 0)
-        }
+            let totalImages = questions.reduce(0) { count, question in
+                count + ((question["images"] as? [[String: Any]])?.count ?? 0)
+            }
 
-        var downloadedImages = 0
+            var downloadedImages = 0
 
-        for (index, question) in questions.enumerated() {
-            if let imagePaths = question["images"] as? [[String: Any]] {
-                var updatedImagePaths: [[String: Any]] = []
-                for imagePath in imagePaths {
-                    if let path = imagePath["path"] as? String {
-                        let imageUrlString = "\(course.repositoryURL)/blob/main/\(path.replacingOccurrences(of: "images/\(course.shortName)/", with: ""))".replacingOccurrences(of: "github.com", with: "raw.githubusercontent.com").replacingOccurrences(of: "/blob/", with: "/")
-                        if let imageUrl = URL(string: imageUrlString) {
-                            let imageData = try Data(contentsOf: imageUrl)
-                            let imageFileName = path.replacingOccurrences(of: "images/\(course.shortName)/", with: "")
-                            let imageFileURL = imagesDirectoryURL.appendingPathComponent(imageFileName)
+            for (index, question) in questions.enumerated() {
+                if let imagePaths = question["images"] as? [[String: Any]] {
+                    var updatedImagePaths: [[String: Any]] = []
+                    for imagePath in imagePaths {
+                        if let path = imagePath["path"] as? String {
+                            let imageUrlStringMain = "\(course.repositoryURL)/blob/main/\(path.replacingOccurrences(of: "images/\(course.shortName)/", with: ""))".replacingOccurrences(of: "github.com", with: "raw.githubusercontent.com").replacingOccurrences(of: "/blob/", with: "/")
+                            let imageUrlStringMaster = "\(course.repositoryURL)/blob/master/\(path.replacingOccurrences(of: "images/\(course.shortName)/", with: ""))".replacingOccurrences(of: "github.com", with: "raw.githubusercontent.com").replacingOccurrences(of: "/blob/", with: "/")
 
-                            let imageFileDirectory = imageFileURL.deletingLastPathComponent()
-                            try FileManager.default.createDirectory(at: imageFileDirectory, withIntermediateDirectories: true, attributes: nil)
+                            if let imageUrlMain = URL(string: imageUrlStringMain), let imageUrlMaster = URL(string: imageUrlStringMaster) {
+                                var imageUrl: URL? = nil
+                                do {
+                                    _ = try Data(contentsOf: imageUrlMain)
+                                    imageUrl = imageUrlMain
+                                } catch {
+                                    _ = try? Data(contentsOf: imageUrlMaster)
+                                    imageUrl = imageUrlMaster
+                                }
+                                
+                                if let imageUrl = imageUrl {
+                                    print("Downloading image: \(imageUrl)")
+                                    let imageData = try Data(contentsOf: imageUrl)
+                                    let imageFileName = path.replacingOccurrences(of: "images/\(course.shortName)/", with: "")
+                                    let imageFileURL = imagesDirectoryURL.appendingPathComponent(imageFileName)
 
-                            try FileManager.default.removeItemIfExists(at: imageFileURL)
-                            try imageData.write(to: imageFileURL)
+                                    let imageFileDirectory = imageFileURL.deletingLastPathComponent()
+                                    try FileManager.default.createDirectory(at: imageFileDirectory, withIntermediateDirectories: true, attributes: nil)
 
-                            updatedImagePaths.append(["path": "images/\(course.shortName)/\(imageFileName)", "url": imageUrl.absoluteString, "downloaded": true])
-                            downloadedImages += 1
-                            progressHandler(downloadedImages, totalImages)
+                                    try FileManager.default.removeItemIfExists(at: imageFileURL)
+                                    try imageData.write(to: imageFileURL)
+
+                                    updatedImagePaths.append(["path": "images/\(course.shortName)/\(imageFileName)", "url": imageUrl.absoluteString, "downloaded": true])
+                                    downloadedImages += 1
+                                    progressHandler(downloadedImages, totalImages)
+                                }
+                            }
                         }
                     }
+                    updatedQuestions[index]["images"] = updatedImagePaths
                 }
-                updatedQuestions[index]["images"] = updatedImagePaths
             }
-        }
 
-        return updatedQuestions
+            return updatedQuestions
+        }
     }
-}
+
 
 extension FileManager {
     func removeItemIfExists(at url: URL) throws {

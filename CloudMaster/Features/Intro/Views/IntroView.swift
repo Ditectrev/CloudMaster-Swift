@@ -119,20 +119,8 @@ struct SecondPage: View {
                 .frame(alignment: .leading)
                 .multilineTextAlignment(.center)
                 .padding()
-
-            SearchBar(text: $searchText)
-                .padding()
-
-            List(Course.allCourses.filter({ searchText.isEmpty ? true : $0.fullName.lowercased().contains(searchText.lowercased()) })) { course in
-                CourseRow(course: course, isBookmarked: favorites.contains(course)) {
-                    if favorites.contains(course) {
-                        favorites.remove(course)
-                    } else {
-                        favorites.insert(course)
-                    }
-                }
-            }
-            .listStyle(PlainListStyle())
+            
+            AllCourses(favorites: $favorites)
 
             Spacer()
 
@@ -157,32 +145,6 @@ struct SearchBar: View {
         HStack {
             TextField("Search courses", text: $text)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-        }
-    }
-}
-
-struct CourseRow: View {
-    let course: Course
-    let isBookmarked: Bool
-    let toggleBookmark: () -> Void
-
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(course.company.rawValue)
-                    .font(.caption)
-                Text(course.shortName)
-                    .font(.headline)
-                Text(course.fullName)
-                    .font(.subheadline)
-            }
-
-            Spacer()
-
-            Button(action: toggleBookmark) {
-                Image(systemName: isBookmarked ? "star.fill" : "star")
-                    .foregroundColor(Color.customSecondary)
-            }
         }
     }
 }
