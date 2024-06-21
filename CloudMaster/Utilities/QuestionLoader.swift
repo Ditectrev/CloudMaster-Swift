@@ -79,7 +79,9 @@ class QuestionLoader: ObservableObject {
     }
 
     private func reorderQuestions(_ questions: [Question]) -> [Question] {
-        let trainingData = UserTrainingStore.shared.trainingData
+        guard let trainingData = UserTrainingStore.shared.trainingData[questions.first?.id.uuidString ?? ""] else {
+            return questions
+        }
 
         let newQuestions = questions.filter { trainingData.questionStats[$0.id] == nil }
         let incorrectQuestions = questions.filter {

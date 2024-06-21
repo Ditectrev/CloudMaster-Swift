@@ -4,10 +4,11 @@ struct TrainingView: View {
     @State private var currentQuestionIndex = 0
     @State private var selectedChoices: Set<UUID> = []
     @State private var showResult = false
-    @State private var userTrainingData = UserTrainingStore.shared.trainingData
     @State private var startTime: Date?
     @State private var isBookmarked: Bool = false
     @Environment(\.presentationMode) var presentationMode
+
+    @ObservedObject var userTrainingStore = UserTrainingStore.shared
 
     let course: Course
     @StateObject private var questionLoader: QuestionLoader
@@ -95,6 +96,7 @@ struct TrainingView: View {
             .navigationBarHidden(true)
             .onAppear {
                 startTime = Date()
+                loadUserTrainingData()
                 updateBookmarkState() // Ensure bookmark state is updated when the view appears
             }
             .onDisappear {
@@ -161,10 +163,14 @@ struct TrainingView: View {
     }
 
     func updateUserTrainingData(for question: Question) {
+        guard var userTrainingData = userTrainingStore.trainingData[course.shortName] else { return }
+        
         if let startTime = startTime {
             userTrainingData.timeSpent += Date().timeIntervalSince(startTime)
         }
-
+        
+        print(userTrainingData.timeSpent)
+        
         let correctChoices = Set(question.choices.filter { $0.correct }.map { $0.id })
         let userCorrectChoices = selectedChoices.intersection(correctChoices)
 
@@ -172,19 +178,17 @@ struct TrainingView: View {
         userTrainingData.wrongAnswers += selectedChoices.subtracting(correctChoices).count
 
         userTrainingData.updateStats(for: question.id, correctChoices: correctChoices, selectedChoices: selectedChoices)
+        
+        userTrainingStore.saveTrainingData(userTrainingData)
     }
 
-    func loadUserTrainingData(for course: Course) {
-        if let data = UserDefaults.standard.data(forKey: course.shortName) {
-            if let decodedData = try? JSONDecoder().decode(UserTrainingData.self, from: data) {
-                userTrainingData = decodedData
-            }
-        }
+    func loadUserTrainingData() {
+        _ = userTrainingStore.loadTrainingData(forCourse: course.shortName)
     }
 
     func saveUserTrainingData() {
-        if let data = try? JSONEncoder().encode(userTrainingData) {
-            UserDefaults.standard.set(data, forKey: course.shortName)
+        if let userTrainingData = userTrainingStore.trainingData[course.shortName] {
+            userTrainingStore.saveTrainingData(userTrainingData)
         }
     }
 }

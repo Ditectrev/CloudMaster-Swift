@@ -1,13 +1,18 @@
 import Foundation
+import SwiftUI
 
-struct UserTrainingData: Codable {
+struct UserTrainingData: Codable, Identifiable {
+    var id = UUID()
+    let shortName: String
+    
     var timeSpent: TimeInterval
     var correctAnswers: Int
     var wrongAnswers: Int
     var questionAttempts: [UUID: Int] // Mapping question ID to the number of attempts
     var questionStats: [UUID: QuestionStats] // Mapping question ID to the stats
 
-    init() {
+    init(shortName: String) {
+        self.shortName = shortName
         self.timeSpent = 0
         self.correctAnswers = 0
         self.wrongAnswers = 0
@@ -16,6 +21,7 @@ struct UserTrainingData: Codable {
     }
 
     mutating func updateStats(for questionID: UUID, correctChoices: Set<UUID>, selectedChoices: Set<UUID>) {
+        
         // Update question attempts
         if let attempts = questionAttempts[questionID] {
             questionAttempts[questionID] = attempts + 1
@@ -38,7 +44,6 @@ struct UserTrainingData: Codable {
             self.questionStats[questionID] = QuestionStats(timesViewed: 1, timesCorrect: timesCorrect, timesIncorrect: timesIncorrect)
         }
     }
-
 }
 
 struct QuestionStats: Codable {
@@ -47,33 +52,42 @@ struct QuestionStats: Codable {
     var timesIncorrect: Int
 }
 
-class UserTrainingStore {
+class UserTrainingStore: ObservableObject {
     static let shared = UserTrainingStore()
-    private let userDefaultsKey = "userTrainingData"
+    private let userDefaultsKeyPrefix = "userTrainingData_"
     
-    private init() {
-        loadTrainingData()
-    }
+    private init() {}
 
-    var trainingData: UserTrainingData = UserTrainingData()
+    @Published var trainingData: [String: UserTrainingData] = [:]
     
-    func loadTrainingData() {
-        if let data = UserDefaults.standard.data(forKey: userDefaultsKey) {
-            if let decodedData = try? JSONDecoder().decode(UserTrainingData.self, from: data) {
-                trainingData = decodedData
-            }
+    func loadTrainingData(forCourse shortName: String) -> UserTrainingData {
+        if let data = UserDefaults.standard.data(forKey: userDefaultsKeyPrefix + shortName),
+           let decodedData = try? JSONDecoder().decode(UserTrainingData.self, from: data) {
+            trainingData[shortName] = decodedData
+            return decodedData
+        } else {
+            let newTrainingData = UserTrainingData(shortName: shortName)
+            trainingData[shortName] = newTrainingData
+            return newTrainingData
         }
     }
     
-    func saveTrainingData() {
-        if let data = try? JSONEncoder().encode(trainingData) {
-            UserDefaults.standard.set(data, forKey: userDefaultsKey)
+    func saveTrainingData(_ data: UserTrainingData) {
+        trainingData[data.shortName] = data
+        if let encoded = try? JSONEncoder().encode(data) {
+            UserDefaults.standard.set(encoded, forKey: userDefaultsKeyPrefix + data.shortName)
         }
     }
     
-    func resetTrainingData() {
-        trainingData = UserTrainingData()
-        saveTrainingData()
-        UserDefaults.standard.removeObject(forKey: userDefaultsKey)
+    func deleteTrainingData(forCourse shortName: String) {
+        trainingData.removeValue(forKey: shortName)
+        UserDefaults.standard.removeObject(forKey: userDefaultsKeyPrefix + shortName)
+    }
+    
+    func deleteAllTrainingData() {
+        trainingData.keys.forEach { shortName in
+            UserDefaults.standard.removeObject(forKey: userDefaultsKeyPrefix + shortName)
+        }
+        trainingData.removeAll()
     }
 }

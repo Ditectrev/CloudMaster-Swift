@@ -12,7 +12,7 @@ struct SettingsView: View {
                 Section(header: Text("Training Data Management")) {
                     Button(action: {
                         showAlertWith(title: "Delete Trainingsdata", message: "Are you sure you want to delete all training data?", action: {
-                            UserTrainingStore.shared.resetTrainingData()
+                            UserTrainingStore.shared.deleteAllTrainingData()
                         })
                     }) {
                         Text("Delete Training data")
