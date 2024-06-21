@@ -22,7 +22,6 @@ struct TrainingView: View {
             VStack {
                 if !questionLoader.questions.isEmpty {
                     let questions = Array(questionLoader.questions)
-                    let totalQuestions = questions.count
                     let question = questions[currentQuestionIndex]
 
                     QuestionNavbar(

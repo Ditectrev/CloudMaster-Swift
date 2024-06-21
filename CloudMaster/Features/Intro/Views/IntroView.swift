@@ -34,7 +34,7 @@ struct IntroView: View {
                 viewModel.downloadCourses(favorites)
             }
         }
-        .onChange(of: viewModel.downloadCompleted) { completed in
+        .onChange(of: viewModel.downloadCompleted) { completed, _ in
             if completed {
                 isAppConfigured = true
             }
