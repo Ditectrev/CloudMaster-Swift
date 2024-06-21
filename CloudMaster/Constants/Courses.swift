@@ -13,7 +13,7 @@ enum CodingKeys: String, CodingKey {
 }
 
 struct Course: Codable, Hashable, Identifiable {
-    let id = UUID() // Add this line
+    var id = UUID() // Add this line
     let fullName: String
     let shortName: String
     let description: String

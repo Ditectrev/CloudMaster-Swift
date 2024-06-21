@@ -87,7 +87,6 @@ struct QuestionView: View {
     }
 
     private func adjustedFontSize(for text: String) -> CGFloat {
-        let maxWidth = UIScreen.main.bounds.width - 32
         let baseFontSize: CGFloat = 20
         let minFontSize: CGFloat = 14
 

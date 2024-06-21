@@ -19,7 +19,7 @@ struct CoursesView: View {
             )
         )
         .alert(isPresented: $viewModel.showAlert) {
-            Alert(title: Text("Download Error"), message: Text(viewModel.alertMessage ?? ""), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Download Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
         }
     }
 
