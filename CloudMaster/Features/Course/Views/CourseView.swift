@@ -1,14 +1,17 @@
 import SwiftUI
+
 struct CourseView: View {
     @State private var isLoading = false
     @State private var downloadProgress: [Course: Progress] = [:]
-    @State private var userTrainingData = UserTrainingData()
+   
     @State private var showingNotificationSettings = false
     @State private var notificationsEnabled = false
     @State private var showingInfoPopup = false
     
     @StateObject private var viewModel = DownloadViewModel()
     @StateObject private var questionLoader: QuestionLoader
+
+    @ObservedObject var userTrainingStore = UserTrainingStore.shared
 
     @Environment(\.colorScheme) var colorScheme
     
@@ -37,7 +40,7 @@ struct CourseView: View {
                 HStack {
                     Image(systemName: "clock")
                         .foregroundColor(.blue)
-                    Text(formatTimeSpent(userTrainingData.timeSpent))
+                    Text(formatTimeSpent(userTrainingStore.trainingData[course.shortName]?.timeSpent ?? 0))
                         .font(.subheadline)
                 }
                 .padding(.top, 20)
@@ -101,7 +104,7 @@ struct CourseView: View {
                 }
             }
             .onAppear {
-                loadUserTrainingData(for: course)
+                loadUserTrainingData()
                 checkNotificationSettings()
                 if questionLoader.questions.isEmpty {
                     downloadCourse()
@@ -154,12 +157,8 @@ struct CourseView: View {
         }
     }
 
-    func loadUserTrainingData(for course: Course) {
-        if let data = UserDefaults.standard.data(forKey: course.shortName) {
-            if let decodedData = try? JSONDecoder().decode(UserTrainingData.self, from: data) {
-                userTrainingData = decodedData
-            }
-        }
+    func loadUserTrainingData() {
+        _ = userTrainingStore.loadTrainingData(forCourse: course.shortName)
     }
 
     func formatTimeSpent(_ time: TimeInterval) -> String {
@@ -234,5 +233,4 @@ struct CourseInformationPopup: View {
         }
         .padding()
     }
-
 }
