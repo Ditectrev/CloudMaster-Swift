@@ -12,7 +12,7 @@ struct ExamSummaryView: View {
     // Helper variable to hide backbutton after Exam
     let afterExam: Bool
     
-    @Environment(\.presentationMode) var presentationMode 
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -87,10 +87,10 @@ struct ExamSummaryView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(afterExam) // Hide back button based on the flag
         .toolbar {
-            if (!afterExam){
-                ToolbarItem(placement: .principal) {
-                    HStack {
-                        Spacer()
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Spacer()
+                    if !afterExam {
                         Button(action: {
                             showDeleteConfirmation = true
                         }) {

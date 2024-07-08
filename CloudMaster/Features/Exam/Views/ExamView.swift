@@ -26,7 +26,7 @@ struct ExamView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack {
                 if !questionLoader.questions.isEmpty {
                     let questions = Array(questionLoader.questions.prefix(questionCount))
@@ -78,6 +78,12 @@ struct ExamView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                         }
+
+                        if let examData = lastExamData {
+                            NavigationLink(destination: ExamSummaryView(exam: examData, afterExam: true), isActive: $navigateToSummary) {
+                                EmptyView()
+                            }
+                        }
                     }
 
                     Spacer()
@@ -90,11 +96,6 @@ struct ExamView: View {
                     .padding()
                 } else {
                     Text("No Questions available! Please download course")
-                }
-            }
-            .navigationDestination(isPresented: $navigateToSummary) {
-                if let examData = lastExamData {
-                    ExamSummaryView(exam: examData, afterExam: true)
                 }
             }
         }
