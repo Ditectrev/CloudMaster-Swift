@@ -168,8 +168,6 @@ struct TrainingView: View {
             userTrainingData.timeSpent += Date().timeIntervalSince(startTime)
         }
         
-        print(userTrainingData.timeSpent)
-        
         let correctChoices = Set(question.choices.filter { $0.correct }.map { $0.id })
         let userCorrectChoices = selectedChoices.intersection(correctChoices)
 

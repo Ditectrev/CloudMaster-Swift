@@ -50,6 +50,7 @@ struct DownloadOverlayView: View {
                     Text(String(format: "%.0f %%", min(self.progress, 1.0) * 100.0))
                         .font(.largeTitle)
                         .bold()
+                        .foregroundColor(.white)
                 } else {
                     withAnimation(.spring()) {
                         Image(systemName: "checkmark.circle.fill")
