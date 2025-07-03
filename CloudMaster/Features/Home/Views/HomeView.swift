@@ -126,6 +126,8 @@ struct StyledCourseRow: View {
             return "azureIcon"
         case .gcp:
             return "gcpIcon"
+        case .scrum:
+            return "scrumIcon"
         case .other:
             return "otherIcon"
         }
@@ -141,6 +143,8 @@ struct StyledCourseRow: View {
             return LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .leading, endPoint: .trailing)
         case .gcp:
             return LinearGradient(gradient: Gradient(colors: [.red, .green, .yellow, .blue]), startPoint: .leading, endPoint: .trailing)
+        case .scrum:
+            return LinearGradient(gradient: Gradient(colors: [.blue, .teal, .teal]), startPoint: .leading, endPoint: .trailing)
         case .other:
             let color1 = Color.purple
             let color2 = Color.pink
