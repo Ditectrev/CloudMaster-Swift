@@ -4,6 +4,7 @@ enum CourseCompany: String, Codable, Hashable, CaseIterable {
     case aws = "Amazon Web Services"
     case azure = "Microsoft Azure"
     case gcp = "Google Cloud Platform"
+    case scrum = "Scrum Alliance"
     case other = "Others"
 }
 
@@ -406,7 +407,7 @@ extension Course {
             shortName: "PSD-1",
             description:
                 "Verifies a developer’s understanding of Scrum principles and their ability to work effectively within a Scrum team, focusing on collaborative and incremental software development practices.",
-            company: .other,
+            company: .scrum,
             repositoryURL:
                 "https://github.com/Ditectrev/Professional-Scrum-Developer-I-PSD-I-Practice-Tests-Exams-Questions-Answers",
             questionURL:
@@ -424,7 +425,7 @@ extension Course {
             shortName: "SM-1",
             description:
                 "Demonstrates advanced proficiency in facilitating and leading Scrum teams, emphasizing the application of Scrum practices, principles, and techniques to maximize team productivity and efficiency.",
-            company: .other,
+            company: .scrum,
             repositoryURL:
                 "https://github.com/Ditectrev/Professional-Scrum-Master-I-PSM-I-Practice-Tests-Exams-Questions-Answers",
             questionURL:
@@ -442,12 +443,30 @@ extension Course {
             shortName: "SM-2",
             description:
                 "Demonstrates advanced proficiency in facilitating and leading Scrum teams, emphasizing the application of Scrum practices, principles, and techniques to maximize team productivity and efficiency.",
-            company: .other,
+            company: .scrum,
             repositoryURL:
                 "https://github.com/Ditectrev/Professional-Scrum-Master-II-PSM-II-Practice-Tests-Exams-Questions-Answers",
             questionURL:
                 "https://raw.githubusercontent.com/Ditectrev/Professional-Scrum-Master-II-PSM-II-Practice-Tests-Exams-Questions-Answers/main/README.md",
             url: "https://www.scrum.org/assessments/professional-scrum-master-ii-certification",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 42),
+                real: ExamDetail(time: 120, questionCount: 60)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
+            fullName: "Scrum Product Owner I",
+            shortName: "PSPO-1",
+            description:
+                "Validates your knowledge of the Scrum framework, with a focus on the role of the Product Owner.",
+            company: .scrum,
+            repositoryURL:
+                "https://github.com/Ditectrev/Scrum-Product-Owner-PSPO-I-Practice-Tests-Exams-Questions-Answers",
+            questionURL:
+                "https://raw.githubusercontent.com/Ditectrev/Scrum-Product-Owner-PSPO-I-Practice-Tests-Exams-Questions-Answers/refs/heads/main/README.md",
+            url: "https://www.scrum.org/assessments/professional-scrum-product-owner-i-certification",
             exam: Exam(
                 quick: ExamDetail(time: 40, questionCount: 20),
                 intermediate: ExamDetail(time: 84, questionCount: 42),
