@@ -348,6 +348,34 @@ extension Course {
             )
         ),
         Course(
+            fullName: "Azure Data Engineer",
+            shortName: "DP-203",
+            description: "Validates expertise in data processing, integration, storage, security, and analytics using Azure data services.",
+            company: .azure,
+            repositoryURL: "https://github.com/Ditectrev/DP-203",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/DP-203/refs/heads/main/README.md",
+            url: "https://learn.microsoft.com/en-us/certifications/azure-data-engineer/",
+            exam: Exam(
+                quick: ExamDetail(time: 60, questionCount: 20),
+                intermediate: ExamDetail(time: 105, questionCount: 42),
+                real: ExamDetail(time: 150, questionCount: 60)
+            )
+        ),
+        Course(
+            fullName: "Azure Data Fundamentals",
+            shortName: "DP-900",
+            description: "Validates foundational knowledge of core data concepts and Microsoft Azure data services.",
+            company: .azure,
+            repositoryURL: "https://github.com/Ditectrev/DP-900",
+            questionURL: "https://raw.githubusercontent.com/Ditectrev/DP-900/main/README.md",
+            url: "https://learn.microsoft.com/en-us/certifications/azure-data-fundamentals/",
+            exam: Exam(
+                quick: ExamDetail(time: 60, questionCount: 20),
+                intermediate: ExamDetail(time: 105, questionCount: 42),
+                real: ExamDetail(time: 150, questionCount: 60)
+            )
+        ),
+        Course(
             fullName: "Associate Cloud Engineer",
             shortName: "ACE",
             description:
