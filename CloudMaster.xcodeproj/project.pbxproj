@@ -219,13 +219,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		8D8D8AA32C05A27800ACC61C /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		8D8D8AA52C05A27800ACC61C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,7 +231,6 @@
 		8D8D8AA62C05A27800ACC61C /* Course */ = {
 			isa = PBXGroup;
 			children = (
-				8D8D8AA32C05A27800ACC61C /* ViewModels */,
 				8D8D8AA52C05A27800ACC61C /* Views */,
 			);
 			path = Course;
@@ -268,13 +260,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		8D8D8AAC2C05A27800ACC61C /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		8D8D8AB22C05A27800ACC61C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,7 +275,6 @@
 			isa = PBXGroup;
 			children = (
 				8D8D8AAB2C05A27800ACC61C /* Models */,
-				8D8D8AAC2C05A27800ACC61C /* ViewModels */,
 				8D8D8AB22C05A27800ACC61C /* Views */,
 			);
 			path = Exam;
@@ -795,6 +779,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
 				PRODUCT_NAME = "CloudMaster Swift";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -831,6 +818,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
 				PRODUCT_NAME = "CloudMaster Swift";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
