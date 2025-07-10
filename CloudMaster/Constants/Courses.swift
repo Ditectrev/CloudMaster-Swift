@@ -449,6 +449,25 @@ extension Course {
             lastUpdate: nil
         ),
         Course(
+            fullName: "Salesforce Certified Data Cloud Consultant",
+            shortName: "Salesforce-DC",
+            description:
+                "Focuses on implementing and configuring Salesforce Data Cloud solutions, including data ingestion, identity resolution, segmentation, activation, and compliance management.",
+            company: .other,
+            repositoryURL:
+                "https://github.com/Ditectrev/Salesforce-Certified-Data-Cloud-Consultant",
+            questionURL:
+                "https://raw.githubusercontent.com/Ditectrev/Salesforce-Certified-Data-Cloud-Consultant/refs/heads/main/README.md",
+            url:
+                "https://trailhead.salesforce.com/en/credentials/datacloudconsultant",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 42),
+                real: ExamDetail(time: 120, questionCount: 60)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
             fullName: "Scrum Developer I",
             shortName: "PSD-1",
             description:
