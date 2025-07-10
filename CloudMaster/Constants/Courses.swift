@@ -206,6 +206,24 @@ extension Course {
             lastUpdate: nil
         ),
         Course(
+            fullName: "Certified SysOps-Administrator Associate",
+            shortName: "SOA-C02",
+            description:
+                "Focuses on deploying, managing, and operating scalable, highly available, and secure systems on AWS with an emphasis on monitoring, automation, and performance optimization.",
+            company: .aws,
+            repositoryURL:
+                "https://github.com/Ditectrev/AWS-Certified-SysOps-Administrator-Associate-SOA-C02-Practice-Tests-Exams-Questions-Answers",
+            questionURL:
+                "https://raw.githubusercontent.com/Ditectrev/AWS-Certified-SysOps-Administrator-Associate-SOA-C02-Practice-Tests-Exams-Questions-Answers/refs/heads/main/README.md",
+            url: "https://aws.amazon.com/certification/certified-sysops-admin-associate/",
+            exam: Exam(
+                quick: ExamDetail(time: 40, questionCount: 20),
+                intermediate: ExamDetail(time: 84, questionCount: 49),
+                real: ExamDetail(time: 120, questionCount: 65)
+            ),
+            lastUpdate: nil
+        ),
+        Course(
             fullName: "Azure Fundamentals",
             shortName: "AZ-900",
             description:
