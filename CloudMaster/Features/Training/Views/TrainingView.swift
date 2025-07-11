@@ -58,6 +58,7 @@ struct TrainingView: View {
                                         .background(Color.customSecondary)
                                         .foregroundColor(.white)
                                         .cornerRadius(10)
+                                        .padding(.horizontal, 16)
                                 }
                             }
 
@@ -71,6 +72,7 @@ struct TrainingView: View {
                                     .background(Color.customPrimary)
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
+                                    .padding(.horizontal, 16)
                             }
                         } else {
                             Button(action: {
@@ -82,6 +84,7 @@ struct TrainingView: View {
                                     .background(Color.customSecondary)
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
+                                    .padding(.horizontal, 16)
                             }
                         }
                     }
