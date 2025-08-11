@@ -450,7 +450,7 @@ extension Course {
         ),
         Course(
             fullName: "Salesforce Certified Data Cloud Consultant",
-            shortName: "Salesforce-DC",
+            shortName: "Salesforce DC",
             description:
                 "Focuses on implementing and configuring Salesforce Data Cloud solutions, including data ingestion, identity resolution, segmentation, activation, and compliance management.",
             company: .other,
