@@ -103,41 +103,30 @@ struct QuestionView: View {
             return;
         }
         
-        let result = getShuffledChoices(choices: question.choices, images: question.images, mode: mode)
-
+        let choices = getShuffledChoices(choices: question.choices, images: question.images, mode: mode)
         shuffledQuestion = Question(
             id: question.id,
             question: question.question,
-            choices: result.choices,
+            choices: choices,
             multipleResponse: question.multipleResponse,
             responseCount: question.responseCount,
-            images: result.images
+            images: question.images
         )
     }
     
-    private func getShuffledChoices(choices: [Choice], images: [ImageInfo], mode: Mode) -> (choices: [Choice], images: [ImageInfo]) {
-
-        if(mode == .bookmarked) {
-            return (choices, images); // Do not shuffle bookmarked choices
+    private func getShuffledChoices(choices: [Choice], images: [ImageInfo], mode: Mode) -> [Choice] {
+        if (mode == .bookmarked) {
+            return choices; // Do not shuffle bookmarked choices
         }
-
-        // No image available or one image available which does not belong to the choices
-        if (images.count == 0 || images.count == 1) {
-            var shuffledChoices = choices;
-            shuffledChoices.shuffle();
-
-            return (shuffledChoices, images);
+        
+        // Do not shuffle choices which belongs to an image (an image is available for each choice), because reference in the answer is lost
+        if (images.count > 1) {
+            return choices;
         }
-
-        let paired = zip(choices, images).map { ($0, $1) }
-        var shuffledPairs = paired
-        shuffledPairs.shuffle()
-
-        // Separate back into choices and images
-        let shuffledChoices = shuffledPairs.map { $0.0 }
-        let shuffledImages = shuffledPairs.map { $0.1 }
-
-        return (shuffledChoices, shuffledImages)
+        
+        var shuffledChoices = choices;
+        shuffledChoices.shuffle();
+        return shuffledChoices;
     }
     
     private func _debug(question: Question) {
