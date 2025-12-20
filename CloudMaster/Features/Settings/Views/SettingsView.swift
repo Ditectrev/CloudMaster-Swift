@@ -26,6 +26,17 @@ struct SettingsView: View {
                         Text("Delete all previous exams")
                     }
                 }
+                
+                Section(header: Text("Preferences")) {
+                    Toggle("Shuffle question choices", isOn: Binding(
+                        get: {
+                            UserDefaults.standard.bool(forKey: "shuffleQuestionChoices")
+                        },
+                        set: { shuffleQuestionChoices in
+                            UserDefaults.standard.set(shuffleQuestionChoices, forKey: "shuffleQuestionChoices")
+                        }
+                    ))
+                }
             }
             .navigationBarTitle("Settings", displayMode: .inline)
             .confirmPopup(isPresented: $showAlert, title: alertTitle, message: alertMessage, confirmAction: {

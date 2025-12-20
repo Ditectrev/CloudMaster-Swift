@@ -19,6 +19,8 @@ struct QuestionView: View {
     @State private var isFullscreenImageShown = false
     @State private var selectedImageIndex = 0
     @State private var shuffledQuestion: Question?
+    
+    @State private var shuffleQuestionChoices: Bool = UserDefaults.standard.bool(forKey: "shuffleQuestionChoices")
 
     var body: some View {
         let displayQuestion = shuffledQuestion ?? question
@@ -96,6 +98,11 @@ struct QuestionView: View {
     }
 
     private func shuffleCurrentQuestionChoices() -> Void {
+        if (!shuffleQuestionChoices) {
+            shuffledQuestion = question;
+            return;
+        }
+        
         let result = getShuffledChoices(choices: question.choices, images: question.images, mode: mode)
 
         shuffledQuestion = Question(
