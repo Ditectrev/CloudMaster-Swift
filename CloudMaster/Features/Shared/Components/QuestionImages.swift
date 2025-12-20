@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct QuestionImages: View {
-    let images: [Question.ImageInfo]
+    let images: [ImageInfo]
     @Binding var currentImageIndex: Int
     @Binding var isFullscreenImageShown: Bool
     @Binding var selectedImageIndex: Int
@@ -53,7 +53,7 @@ struct QuestionImages: View {
 
 
 struct FullscreenImageView: View {
-    let images: [Question.ImageInfo]
+    let images: [ImageInfo]
     @Binding var selectedImageIndex: Int
     @Binding var isShown: Bool
 

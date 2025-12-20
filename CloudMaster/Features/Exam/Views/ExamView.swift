@@ -44,24 +44,27 @@ struct ExamView: View {
                         }
                         .padding(.horizontal)
                         
+                        let question = questions[currentQuestionIndex]
+                        
                         QuestionView(
                             mode: .exam,
-                            question: questions[currentQuestionIndex],
-                            selectedChoices: selectedChoices[questions[currentQuestionIndex].id] ?? [],
-                            isMultipleResponse: questions[currentQuestionIndex].multipleResponse,
+                            question: question,
+                            selectedChoices: selectedChoices[question.id] ?? [],
+                            isMultipleResponse: question.multipleResponse,
                             isResultShown: false, // Exam mode does not show result immediately
                             onChoiceSelected: { choiceId in
-                                if questions[currentQuestionIndex].multipleResponse {
-                                    if selectedChoices[questions[currentQuestionIndex].id]?.contains(choiceId) == true {
-                                        selectedChoices[questions[currentQuestionIndex].id]?.remove(choiceId)
+                                if question.multipleResponse {
+                                    if selectedChoices[question.id]?.contains(choiceId) == true {
+                                        selectedChoices[question.id]?.remove(choiceId)
                                     } else {
-                                        selectedChoices[questions[currentQuestionIndex].id, default: []].insert(choiceId)
+                                        selectedChoices[question.id, default: []].insert(choiceId)
                                     }
                                 } else {
-                                    selectedChoices[questions[currentQuestionIndex].id] = [choiceId]
+                                    selectedChoices[question.id] = [choiceId]
                                 }
                             }
                         )
+                        .id(question.id)
                         
                         Button(action: {
                             if currentQuestionIndex < questions.count - 1 {

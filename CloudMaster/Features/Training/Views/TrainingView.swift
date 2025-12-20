@@ -41,6 +41,7 @@ struct TrainingView: View {
                             handleChoiceSelection(choiceID, question)
                         }
                     )
+                    .id(question.id)
                     .navigationBarItems(trailing: bookmarkButton)
                     .onAppear {
                         updateBookmarkState()
