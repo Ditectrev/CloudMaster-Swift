@@ -18,12 +18,17 @@ struct QuestionView: View {
     @State private var currentImageIndex = 0
     @State private var isFullscreenImageShown = false
     @State private var selectedImageIndex = 0
+    @State private var shuffledQuestion: Question?
+    
+    @State private var shuffleQuestionChoices: Bool = UserDefaults.standard.bool(forKey: "shuffleQuestionChoices")
 
     var body: some View {
+        let displayQuestion = shuffledQuestion ?? question
+
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text(question.question)
-                    .font(.system(size: adjustedFontSize(for: question.question), weight: .bold))
+                Text(displayQuestion.question)
+                    .font(.system(size: adjustedFontSize(for: displayQuestion.question), weight: .bold))
                     .minimumScaleFactor(0.5)
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
@@ -31,7 +36,7 @@ struct QuestionView: View {
                     .multilineTextAlignment(.leading)
                     .lineSpacing(2)
 
-                QuestionImages(images: question.images,
+                QuestionImages(images: displayQuestion.images,
                                currentImageIndex: $currentImageIndex,
                                isFullscreenImageShown: $isFullscreenImageShown,
                                selectedImageIndex: $selectedImageIndex)
@@ -41,7 +46,7 @@ struct QuestionView: View {
                 
                 if isMultipleResponse {
                     VStack {
-                        Text("Multiple response - Pick \(question.responseCount)")
+                        Text("Multiple response - Pick \(displayQuestion.responseCount)")
                             .font(.subheadline)
                             .multilineTextAlignment(.center)
                             .opacity(0.7)
@@ -53,7 +58,7 @@ struct QuestionView: View {
                     .padding(.horizontal)
                 }
 
-                ForEach(question.choices) { choice in
+                ForEach(displayQuestion.choices) { choice in
                     if mode == .training {
                         TrainingChoice(
                             choice: choice,
@@ -75,15 +80,57 @@ struct QuestionView: View {
                     }
                 }
             }
+            .onAppear {
+                shuffleCurrentQuestionChoices()
+            }
+            .onChange(of: question.id) { _ in
+                shuffleCurrentQuestionChoices()
+            }
             .padding()
         }
         .overlay(
             Group {
                 if isFullscreenImageShown {
-                    FullscreenImageView(images: question.images, selectedImageIndex: $selectedImageIndex, isShown: $isFullscreenImageShown)
+                    FullscreenImageView(images: displayQuestion.images, selectedImageIndex: $selectedImageIndex, isShown: $isFullscreenImageShown)
                 }
             }
         )
+    }
+
+    private func shuffleCurrentQuestionChoices() -> Void {
+        if (!shuffleQuestionChoices) {
+            shuffledQuestion = question;
+            return;
+        }
+        
+        let choices = getShuffledChoices(choices: question.choices, images: question.images, mode: mode)
+        shuffledQuestion = Question(
+            id: question.id,
+            question: question.question,
+            choices: choices,
+            multipleResponse: question.multipleResponse,
+            responseCount: question.responseCount,
+            images: question.images
+        )
+    }
+    
+    private func getShuffledChoices(choices: [Choice], images: [ImageInfo], mode: Mode) -> [Choice] {
+        if (mode == .bookmarked) {
+            return choices; // Do not shuffle bookmarked choices
+        }
+        
+        // Do not shuffle choices which belongs to an image (an image is available for each choice), because reference in the answer is lost
+        if (images.count > 1) {
+            return choices;
+        }
+        
+        var shuffledChoices = choices;
+        shuffledChoices.shuffle();
+        return shuffledChoices;
+    }
+    
+    private func _debug(question: Question) {
+        print(question)
     }
 
     private func adjustedFontSize(for text: String) -> CGFloat {

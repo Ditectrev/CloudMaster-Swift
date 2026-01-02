@@ -1,20 +1,15 @@
 import Foundation
 
 struct Question: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     let question: String
-    let choices: [Choice]
+    var choices: [Choice]
     var multipleResponse: Bool
     var responseCount: Int
-    let images: [ImageInfo]
+    var images: [ImageInfo]
 
     enum CodingKeys: String, CodingKey {
         case question, choices, multipleResponse = "multiple_response", responseCount = "response_count", images
-    }
-
-    struct ImageInfo: Codable {
-        let path: String
-        let url: String?
     }
 
     init(from decoder: Decoder) throws {
@@ -25,8 +20,21 @@ struct Question: Identifiable, Codable {
         responseCount = try container.decodeIfPresent(Int.self, forKey: .responseCount) ?? 0
         images = try container.decodeIfPresent([ImageInfo].self, forKey: .images) ?? []
     }
+    
+    init(id: UUID, question: String, choices: [Choice], multipleResponse: Bool, responseCount: Int, images: [ImageInfo]) {
+        self.id = id;
+        self.question = question;
+        self.choices = choices;
+        self.multipleResponse = multipleResponse;
+        self.responseCount = responseCount;
+        self.images = images;
+    }
 }
 
+struct ImageInfo: Codable {
+    let path: String
+    let url: String?
+}
 
 struct Choice: Identifiable, Codable {
     var id = UUID()
