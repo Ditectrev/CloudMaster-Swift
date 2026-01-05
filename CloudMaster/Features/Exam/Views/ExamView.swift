@@ -26,7 +26,7 @@ struct ExamView: View {
     }
 
     var body: some View {
-        NavigationView {
+        VStack {
             VStack {
                 if !questionLoader.questions.isEmpty {
                     let questions = Array(questionLoader.questions.prefix(questionCount))
