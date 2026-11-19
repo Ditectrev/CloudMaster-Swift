@@ -7,10 +7,10 @@ struct ExamView: View {
     @State private var currentQuestionIndex = 0
     @State private var selectedChoices: [UUID: Set<UUID>] = [:]
     @State private var timeRemaining: Int
-    @State private var examFinished = false
     @State private var startTime: Date = Date()
     @State private var lastExamData: UserExamData? = nil
     @State private var navigateToSummary = false
+    @State private var attemptSession = ExamAttemptSession()
 
     let questionCount: Int
     let timeLimit: Int
@@ -104,15 +104,18 @@ struct ExamView: View {
         }
         .onAppear(perform: startTimer)
         .onDisappear {
-            if !examFinished {
+            // Opening the summary, or leaving the exam, also calls this.
+            // The attempt session records the result on the first call only.
+            if attemptSession.didStoreResult {
+                attemptSession.invalidateTimer()
+            } else {
                 endExamIfNeeded()
             }
         }
     }
 
     func startTimer() {
-        startTime = Date()
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        let didStart = attemptSession.startCountdown { timer in
             if timeRemaining > 0 {
                 timeRemaining -= 1
             } else {
@@ -121,9 +124,14 @@ struct ExamView: View {
                 navigateToSummary = true
             }
         }
+        if didStart {
+            startTime = Date()
+        }
     }
 
     func storeExamData(questions: [Question]) {
+        guard attemptSession.beginStoringResult() else { return }
+
         let endTime = Date()
         let timeSpent = Int(endTime.timeIntervalSince(startTime))
         let totalQuestions = questions.count
@@ -154,13 +162,14 @@ struct ExamView: View {
         
         UserExamDataStore.shared.saveExamData(examData)
         lastExamData = examData
-        examFinished = true
     }
 
     private func endExamIfNeeded() {
-        if timeRemaining > 0 {
-            timeRemaining = 0 // End the exam immediately
-            storeExamData(questions: Array(questionLoader.questions.prefix(questionCount)))
+        guard !attemptSession.didStoreResult else { return }
+        let showSummary = timeRemaining > 0
+        timeRemaining = 0
+        storeExamData(questions: Array(questionLoader.questions.prefix(questionCount)))
+        if showSummary {
             navigateToSummary = true
         }
     }
