@@ -789,7 +789,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
 				PRODUCT_NAME = "CloudMaster Swift";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -834,7 +834,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
 				PRODUCT_NAME = "CloudMaster Swift";
 				PROVISIONING_PROFILE_SPECIFIER = "";
