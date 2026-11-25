@@ -54,6 +54,7 @@ struct TrainingView: View {
                                     showPreviousQuestion()
                                 }) {
                                     Text("Previous")
+                                        .font(.brandHeading(.body))
                                         .padding(10)
                                         .frame(maxWidth: .infinity)
                                         .background(Color.customSecondary)
@@ -68,6 +69,7 @@ struct TrainingView: View {
                                 updateUserTrainingData(for: question)
                             }) {
                                 Text("Show Result")
+                                    .font(.brandHeading(.body))
                                     .padding(10)
                                     .frame(maxWidth: .infinity)
                                     .background(Color.customPrimary)
@@ -80,6 +82,7 @@ struct TrainingView: View {
                                 showNextQuestion()
                             }) {
                                 Text("Next Question")
+                                    .font(.brandHeading(.body))
                                     .padding(10)
                                     .frame(maxWidth: .infinity)
                                     .background(Color.customSecondary)

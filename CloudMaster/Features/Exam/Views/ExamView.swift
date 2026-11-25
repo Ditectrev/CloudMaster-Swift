@@ -36,7 +36,7 @@ struct ExamView: View {
                             HStack {
                                 Spacer()
                                 Text("\(currentQuestionIndex + 1) of \(questionCount)")
-                                    .font(.subheadline)
+                                    .font(.brandBody(.subheadline))
                                     .foregroundColor(.secondary)
                                 Spacer()
                             }
@@ -75,6 +75,7 @@ struct ExamView: View {
                             }
                         }) {
                             Text(currentQuestionIndex < questions.count - 1 ? "Next Question" : "Show Exam Result")
+                                .font(.brandHeading(.body))
                                 .padding()
                                 .frame(maxWidth: .infinity)
                                 .background(Color.customSecondary)
@@ -94,7 +95,7 @@ struct ExamView: View {
                     HStack {
                         Image(systemName: "timer")
                         Text(timeFormatted(timeRemaining))
-                            .font(.headline)
+                            .font(.brandHeading(.headline))
                     }
                     .padding()
                 } else {

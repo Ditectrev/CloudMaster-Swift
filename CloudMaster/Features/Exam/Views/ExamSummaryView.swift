@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 private struct MainMenuNavigationKey: EnvironmentKey {
-    static let defaultValue = MainMenuNavigation()
+    static let defaultValue = MainMenuNavigation.shared
 }
 
 extension EnvironmentValues {
@@ -24,25 +24,25 @@ struct ExamSummaryView: View {
     let afterExam: Bool
     
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.mainMenuNavigation) private var mainMenuNavigation
     
     var body: some View {
         VStack {
             Text(exam.isPassed ? "Passed" : "Failed")
-                .font(.largeTitle)
+                .font(.brandHeading(.largeTitle))
                 .foregroundColor(exam.isPassed ? .correct : .wrong)
                 .padding(.bottom)
             
             Text("\(exam.dateTime.formatted())")
-                .font(.title3)
+                .font(.brandHeading(.title3))
             
             Text("Correct Answers: \(correctAnswersCount) / \(exam.questions.count)")
-                .font(.title2)
+                .font(.brandHeading(.title2))
                 .padding(.bottom)
 
             if afterExam {
-                Button(action: mainMenuNavigation.returnToMainMenu) {
+                Button(action: MainMenuNavigation.returnToMainMenuFromExamResult) {
                     Text("Back to Main Menu")
+                        .font(.brandHeading(.body))
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(Color.customPrimary)
@@ -57,7 +57,7 @@ struct ExamSummaryView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Text(question.question)
-                                .font(.headline)
+                                .font(.brandHeading(.headline))
                                 .lineLimit(expandedQuestionIDs.contains(question.id) ? nil : 2)
                                 .onTapGesture {
                                     if expandedQuestionIDs.contains(question.id) {

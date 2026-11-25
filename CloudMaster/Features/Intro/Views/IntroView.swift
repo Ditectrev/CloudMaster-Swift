@@ -52,19 +52,19 @@ struct FirstPage: View {
 
         VStack() {
             Text("WELCOME TO")
-                .font(.system(size: 24, weight: .light, design: .default))
+                .font(.brandHeading(size: 24))
                 .transition(.opacity)
                 .frame(alignment: .leading)
                 .multilineTextAlignment(.center)
 
             Text("Cloudmaster")
-                .font(.system(size: 36, weight: .bold, design: .default))
+                .font(.brandHeading(size: 36).weight(.bold))
                 .transition(.opacity)
                 .frame(alignment: .leading)
                 .multilineTextAlignment(.center)
 
             Text("Improve your knowledge and get ready for exams")
-                .font(.system(size: 18, weight: .light, design: .default))
+                .font(.brandBody(size: 18))
                 .bold()
                 .padding(.bottom, 20)
                 .frame(alignment: .leading)
@@ -82,6 +82,7 @@ struct FirstPage: View {
 
             Button(action: onNext) {
                 Text("Select Courses")
+                    .font(.brandHeading(.body))
                     .foregroundColor(.white)
                     .padding()
                     .background(Color.customPrimary)
@@ -101,19 +102,19 @@ struct SecondPage: View {
     var body: some View {
         VStack {
             Text("WELCOME TO")
-                .font(.system(size: 24, weight: .light, design: .default))
+                .font(.brandHeading(size: 24))
                 .transition(.opacity)
                 .frame(alignment: .leading)
                 .multilineTextAlignment(.center)
 
             Text("Cloudmaster")
-                .font(.system(size: 36, weight: .bold, design: .default))
+                .font(.brandHeading(size: 36).weight(.bold))
                 .transition(.opacity)
                 .frame(alignment: .leading)
                 .multilineTextAlignment(.center)
             
             Text("Select your courses to study")
-                .font(.system(size: 18, weight: .light, design: .default))
+                .font(.brandBody(size: 18))
                 .bold()
                 .padding(.bottom, 20)
                 .frame(alignment: .leading)
@@ -128,6 +129,7 @@ struct SecondPage: View {
                 UserDefaults.standard.set(true, forKey: "isFirstStart")
                 showDownloadOverlayView = true
             }
+            .font(.brandHeading(.body))
             .foregroundColor(.white)
             .padding()
             .background(Color.customPrimary)

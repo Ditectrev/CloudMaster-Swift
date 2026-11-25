@@ -233,6 +233,25 @@ final class UserExamDataStoreTests: XCTestCase {
         XCTAssertNotEqual(navigation.resetID, afterFirstReturn)
     }
 
+    func testExamResultReturnResetsTheHomeCoordinator() {
+        let home = MainMenuNavigation.shared
+        let original = home.resetID
+
+        MainMenuNavigation.returnToMainMenuFromExamResult()
+
+        XCTAssertNotEqual(home.resetID, original)
+    }
+
+    func testBrandFontsMatchTheDitectrevSites() {
+        XCTAssertEqual(BrandFont.family(for: .heading), "Philosopher")
+        XCTAssertEqual(BrandFont.family(for: .button), "Philosopher")
+        XCTAssertEqual(BrandFont.family(for: .body), "Lora")
+        XCTAssertEqual(
+            BrandFont.resourceFiles,
+            ["Philosopher-Regular.ttf", "Philosopher-Bold.ttf", "Lora-Variable.ttf"]
+        )
+    }
+
     func testAttemptSessionRecordsOnceAndStartsOneCountdown() {
         let session = ExamAttemptSession()
         var ticks = 0

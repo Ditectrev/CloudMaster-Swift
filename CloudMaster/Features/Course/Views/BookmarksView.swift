@@ -14,7 +14,7 @@ struct BookmarksView: View {
                         .foregroundColor(.gray)
                         .padding(.bottom, 20)
                     Text("No questions saved")
-                        .font(.title)
+                        .font(.brandHeading(.title))
                         .foregroundColor(.gray)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -24,7 +24,7 @@ struct BookmarksView: View {
                         NavigationLink(destination: QuestionDetailView(question: bookmark.question, bookmarks: $bookmarks)) {
                             VStack(alignment: .leading) {
                                 Text(bookmark.question.question.prefix(40) + "...")
-                                    .font(.headline)
+                                    .font(.brandHeading(.headline))
                                     .lineLimit(2)
                                     .padding(.vertical,5)
                             }

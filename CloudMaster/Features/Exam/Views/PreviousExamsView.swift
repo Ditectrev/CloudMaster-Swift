@@ -10,14 +10,14 @@ struct PreviousExamsView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text(exam.mode)
-                            .font(.caption)
+                            .font(.brandBody(.caption))
                             .bold()
                         Text(exam.shortName)
-                            .font(.headline)
+                            .font(.brandHeading(.headline))
                         Text(exam.courseName)
-                            .font(.subheadline)
+                            .font(.brandBody(.subheadline))
                         Text("\(exam.dateTime.formatted())")
-                            .font(.caption)
+                            .font(.brandBody(.caption))
                             .bold()
                     }
                     
@@ -25,7 +25,7 @@ struct PreviousExamsView: View {
                     
                     Text(exam.isPassed ? "Passed" : "Failed")
                         .foregroundColor(exam.isPassed ? .green : .red)
-                        .font(.subheadline)
+                        .font(.brandBody(.subheadline))
                         .frame(maxHeight: .infinity)
                         .padding(.leading)
                 }

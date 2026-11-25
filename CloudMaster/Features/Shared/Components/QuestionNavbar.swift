@@ -13,14 +13,14 @@ struct QuestionNavbar: View {
                 presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "chevron.left")
-                    .font(.title3)
+                    .font(.brandHeading(.title3))
                     .foregroundColor(.blue)
             }
             
             Spacer()
             
             Text("\(currentQuestionIndex + 1) of \(totalQuestions)")
-                .font(.subheadline)
+                .font(.brandBody(.subheadline))
                 .foregroundColor(.secondary)
             
             Spacer()
@@ -36,7 +36,7 @@ struct QuestionNavbar: View {
                 }
             }) {
                 Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
-                    .font(.title3)
+                    .font(.brandHeading(.title3))
                     .foregroundColor(.blue)
             }
         }
