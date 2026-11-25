@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Binding var favorites: Set<Course>
+    @StateObject private var mainMenuNavigation = MainMenuNavigation.shared
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -23,7 +24,7 @@ struct HomeView: View {
                             .frame(width: 100, height: 100)
                             .foregroundColor(.gray)
                         Text("No Courses")
-                            .font(.title)
+                            .font(.brandHeading(.title))
                             .foregroundColor(.gray)
                     }
                     Spacer()
@@ -45,6 +46,7 @@ struct HomeView: View {
                 NavigationLink(destination: CoursesView(favorites: $favorites)) {
                     HStack {
                         Text(favorites.isEmpty ? "Add Courses" : "Manage Courses")
+                            .font(.brandHeading(.body))
                     }
                     .foregroundColor(.white)
                     .padding()
@@ -63,12 +65,14 @@ struct HomeView: View {
                 .padding(.bottom, 5)
                 
                 Text(appVersion)
-                     .font(.footnote)
+                     .font(.brandBody(.footnote))
                      .foregroundColor(.gray)
                      .padding(.bottom, 10)
             }
             .navigationBarTitle("CloudMaster", displayMode: .inline)
             .navigationBarItems( trailing: settingsButton)
+            .environment(\.mainMenuNavigation, mainMenuNavigation)
+            .id(mainMenuNavigation.resetID)
         }
         .navigationBarBackButtonHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
@@ -101,9 +105,9 @@ struct StyledCourseRow: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(course.shortName)
-                    .font(.headline)
+                    .font(.brandHeading(.headline))
                 Text(course.fullName)
-                    .font(.subheadline)
+                    .font(.brandBody(.subheadline))
                     .lineLimit(1) // Ensure the text doesn't exceed one line
             }
 

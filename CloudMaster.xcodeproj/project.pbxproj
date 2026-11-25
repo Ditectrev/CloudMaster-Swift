@@ -34,7 +34,16 @@
 		8D8D8AE02C05A27800ACC61C /* CloudMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC52C05A27800ACC61C /* CloudMaster.swift */; };
 		8D8D8AE12C05A27800ACC61C /* Courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC62C05A27800ACC61C /* Courses.swift */; };
 		8D8D8AE22C05A27800ACC61C /* DownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */; };
+		8D60A0042C19E20000ACC61C /* DownloadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60A0032C19E20000ACC61C /* DownloadProgress.swift */; };
 		8D8D8AE32C05A27800ACC61C /* FavoriteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */; };
+		8D60A0022C19E10000ACC61C /* MainMenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */; };
+		8D60A0202C19E30000ACC61C /* BrandFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60A0182C19E30000ACC61C /* BrandFont.swift */; };
+		8D60A0212C19E30000ACC61C /* BrandTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60A0192C19E30000ACC61C /* BrandTypography.swift */; };
+		8D60A0222C19E30000ACC61C /* Philosopher-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D60A0112C19E30000ACC61C /* Philosopher-Regular.ttf */; };
+		8D60A0232C19E30000ACC61C /* Philosopher-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D60A0122C19E30000ACC61C /* Philosopher-Bold.ttf */; };
+		8D60A0242C19E30000ACC61C /* Lora-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D60A0132C19E30000ACC61C /* Lora-Variable.ttf */; };
+		8D60A0252C19E30000ACC61C /* OFL-Philosopher.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8D60A0142C19E30000ACC61C /* OFL-Philosopher.txt */; };
+		8D60A0262C19E30000ACC61C /* OFL-Lora.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8D60A0152C19E30000ACC61C /* OFL-Lora.txt */; };
 		8D8D8AE42C05A27800ACC61C /* QuestionLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */; };
 		8D8D8AE52C05A27800ACC61C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D8D8ACC2C05A27800ACC61C /* Preview Assets.xcassets */; };
 		8D8D8AE72C05A2FD00ACC61C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 8D8D8AE62C05A2FD00ACC61C /* LICENSE */; };
@@ -96,7 +105,16 @@
 		8D8D8AC52C05A27800ACC61C /* CloudMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudMaster.swift; sourceTree = "<group>"; };
 		8D8D8AC62C05A27800ACC61C /* Courses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courses.swift; sourceTree = "<group>"; };
 		8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadUtility.swift; sourceTree = "<group>"; };
+		8D60A0032C19E20000ACC61C /* DownloadProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadProgress.swift; sourceTree = "<group>"; };
 		8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteStorage.swift; sourceTree = "<group>"; };
+		8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuNavigation.swift; sourceTree = "<group>"; };
+		8D60A0182C19E30000ACC61C /* BrandFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandFont.swift; sourceTree = "<group>"; };
+		8D60A0192C19E30000ACC61C /* BrandTypography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandTypography.swift; sourceTree = "<group>"; };
+		8D60A0112C19E30000ACC61C /* Philosopher-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Philosopher-Regular.ttf"; sourceTree = "<group>"; };
+		8D60A0122C19E30000ACC61C /* Philosopher-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Philosopher-Bold.ttf"; sourceTree = "<group>"; };
+		8D60A0132C19E30000ACC61C /* Lora-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lora-Variable.ttf"; sourceTree = "<group>"; };
+		8D60A0142C19E30000ACC61C /* OFL-Philosopher.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "OFL-Philosopher.txt"; sourceTree = "<group>"; };
+		8D60A0152C19E30000ACC61C /* OFL-Lora.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "OFL-Lora.txt"; sourceTree = "<group>"; };
 		8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionLoader.swift; sourceTree = "<group>"; };
 		8D8D8ACC2C05A27800ACC61C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8D8D8AE62C05A2FD00ACC61C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -184,6 +202,7 @@
 			children = (
 				8D8D8AC42C05A27800ACC61C /* Assets.xcassets */,
 				8D8D8AC52C05A27800ACC61C /* CloudMaster.swift */,
+				8D60A0102C19E30000ACC61C /* Fonts */,
 				8D8D8AC72C05A27800ACC61C /* Constants */,
 				8D8D8AC32C05A27800ACC61C /* Features */,
 				8D8D8ACD2C05A27800ACC61C /* Preview Content */,
@@ -381,10 +400,26 @@
 			isa = PBXGroup;
 			children = (
 				8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */,
+				8D60A0032C19E20000ACC61C /* DownloadProgress.swift */,
 				8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */,
+				8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */,
+				8D60A0182C19E30000ACC61C /* BrandFont.swift */,
+				8D60A0192C19E30000ACC61C /* BrandTypography.swift */,
 				8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8D60A0102C19E30000ACC61C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8D60A0132C19E30000ACC61C /* Lora-Variable.ttf */,
+				8D60A0152C19E30000ACC61C /* OFL-Lora.txt */,
+				8D60A0142C19E30000ACC61C /* OFL-Philosopher.txt */,
+				8D60A0122C19E30000ACC61C /* Philosopher-Bold.ttf */,
+				8D60A0112C19E30000ACC61C /* Philosopher-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		8D8D8ACD2C05A27800ACC61C /* Preview Content */ = {
@@ -546,6 +581,11 @@
 				8D8D8AF02C05A31C00ACC61C /* CM_black.png in Resources */,
 				8D8D8AF12C05A31D00ACC61C /* CM_White.png in Resources */,
 				8D8D8AF32C05A31D00ACC61C /* Icon.afpub in Resources */,
+				8D60A0222C19E30000ACC61C /* Philosopher-Regular.ttf in Resources */,
+				8D60A0232C19E30000ACC61C /* Philosopher-Bold.ttf in Resources */,
+				8D60A0242C19E30000ACC61C /* Lora-Variable.ttf in Resources */,
+				8D60A0252C19E30000ACC61C /* OFL-Philosopher.txt in Resources */,
+				8D60A0262C19E30000ACC61C /* OFL-Lora.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +614,7 @@
 				8D8D8ADE2C05A27800ACC61C /* TrainingView.swift in Sources */,
 				8D8D8AD02C05A27800ACC61C /* NotificationSettingsView.swift in Sources */,
 				8D8D8AE22C05A27800ACC61C /* DownloadUtility.swift in Sources */,
+				8D60A0042C19E20000ACC61C /* DownloadProgress.swift in Sources */,
 				8D8D8AD22C05A27800ACC61C /* CoursesView.swift in Sources */,
 				8D8D8AD72C05A27800ACC61C /* ExamView.swift in Sources */,
 				8D8D8ADA2C05A27800ACC61C /* IntroView.swift in Sources */,
@@ -586,6 +627,9 @@
 				8D8D8AE42C05A27800ACC61C /* QuestionLoader.swift in Sources */,
 				8D8D8ACE2C05A27800ACC61C /* ConfirmPopup.swift in Sources */,
 				8D8D8AE32C05A27800ACC61C /* FavoriteStorage.swift in Sources */,
+				8D60A0022C19E10000ACC61C /* MainMenuNavigation.swift in Sources */,
+				8D60A0202C19E30000ACC61C /* BrandFont.swift in Sources */,
+				8D60A0212C19E30000ACC61C /* BrandTypography.swift in Sources */,
 				8D3F7ABE2C202FD100D200CA /* AllCourses.swift in Sources */,
 				8D26A3202C0EE4A000E9B015 /* QuestionView.swift in Sources */,
 				8D8D8AD62C05A27800ACC61C /* ExamSummaryView.swift in Sources */,
@@ -770,6 +814,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "CloudMaster Swift";
+				INFOPLIST_KEY_UIAppFonts = (
+					"Lora-Variable.ttf",
+					"Philosopher-Bold.ttf",
+					"Philosopher-Regular.ttf",
+				);
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -781,7 +830,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
 				PRODUCT_NAME = "CloudMaster Swift";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -815,6 +864,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "CloudMaster Swift";
+				INFOPLIST_KEY_UIAppFonts = (
+					"Lora-Variable.ttf",
+					"Philosopher-Bold.ttf",
+					"Philosopher-Regular.ttf",
+				);
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -826,7 +880,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ditectrev.cloudmasterswift;
 				PRODUCT_NAME = "CloudMaster Swift";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -16,6 +16,7 @@ struct SettingsView: View {
                         })
                     }) {
                         Text("Delete Training data")
+                            .font(.brandHeading(.body))
                     }
 
                     Button(action: {
@@ -24,6 +25,7 @@ struct SettingsView: View {
                         })
                     }) {
                         Text("Delete all previous exams")
+                            .font(.brandHeading(.body))
                     }
                 }
                 

@@ -19,7 +19,7 @@ struct AllCourses: View {
                 ForEach(CourseCompany.allCases, id: \.self) { company in
                     let companyCourses = filteredCourses.filter { $0.company == company }
                     if !companyCourses.isEmpty {
-                        Section(header: Text(company.rawValue.uppercased()).font(.title3)) {
+                        Section(header: Text(company.rawValue.uppercased()).font(.brandHeading(.title3))) {
                             ForEach(companyCourses) { course in
                                 CourseRow(
                                     course: course,
@@ -52,11 +52,11 @@ struct CourseRow: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(course.company.rawValue)
-                    .font(.caption)
+                    .font(.brandBody(.caption))
                 Text(course.shortName)
-                    .font(.headline)
+                    .font(.brandHeading(.headline))
                 Text(course.fullName)
-                    .font(.subheadline)
+                    .font(.brandBody(.subheadline))
             }
 
             Spacer()

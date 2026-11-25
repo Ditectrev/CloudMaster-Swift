@@ -28,7 +28,7 @@ struct QuestionView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Text(displayQuestion.question)
-                    .font(.system(size: adjustedFontSize(for: displayQuestion.question), weight: .bold))
+                    .font(.brandBody(size: adjustedFontSize(for: displayQuestion.question), weight: .bold))
                     .minimumScaleFactor(0.5)
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
@@ -47,7 +47,7 @@ struct QuestionView: View {
                 if isMultipleResponse {
                     VStack {
                         Text("Multiple response - Pick \(displayQuestion.responseCount)")
-                            .font(.subheadline)
+                            .font(.brandBody(.subheadline))
                             .multilineTextAlignment(.center)
                             .opacity(0.7)
                             .padding(.vertical, 5)

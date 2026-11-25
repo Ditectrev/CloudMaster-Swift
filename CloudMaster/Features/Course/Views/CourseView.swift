@@ -33,13 +33,13 @@ struct CourseView: View {
             VStack {
                 if !questionLoader.questions.isEmpty {
                     Text(course.fullName)
-                        .font(.title)
+                        .font(.brandHeading(.title))
                         .bold()
                         .padding()
                         .frame(alignment: .leading)
                         .multilineTextAlignment(.center)
                     Text(course.description)
-                        .font(.caption)
+                        .font(.brandBody(.caption))
                         .frame(alignment: .leading)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
@@ -48,7 +48,7 @@ struct CourseView: View {
                         Image(systemName: "clock")
                             .foregroundColor(.blue)
                         Text(formatTimeSpent(userTrainingStore.trainingData[course.shortName]?.timeSpent ?? 0))
-                            .font(.subheadline)
+                            .font(.brandBody(.subheadline))
                     }
                     .padding(.top, 20)
                     
@@ -57,10 +57,10 @@ struct CourseView: View {
                         NavigationLink(destination: TrainingView(course: course)) {
                             VStack {
                                 Text("Training")
-                                    .font(.title)
+                                    .font(.brandHeading(.title))
                                     .foregroundColor(.white)
                                 Text("Practice and learn random questions")
-                                    .font(.subheadline)
+                                    .font(.brandBody(.subheadline))
                                     .foregroundColor(.white)
                             }
                             .padding()
@@ -71,10 +71,10 @@ struct CourseView: View {
                         NavigationLink(destination: TrainingView(course: course)) {
                             VStack {
                                 Text("Intelligent Training")
-                                    .font(.title)
+                                    .font(.brandHeading(.title))
                                     .foregroundColor(.white)
                                 Text("Train based on your learning history")
-                                    .font(.subheadline)
+                                    .font(.brandBody(.subheadline))
                                     .foregroundColor(.white)
                             }
                             .padding()
@@ -85,10 +85,10 @@ struct CourseView: View {
                         NavigationLink(destination: ExamModeView(course: course)) {
                             VStack {
                                 Text("Exam")
-                                    .font(.title)
+                                    .font(.brandHeading(.title))
                                     .foregroundColor(.white)
                                 Text("Challenge yourself with timed exams")
-                                    .font(.subheadline)
+                                    .font(.brandBody(.subheadline))
                                     .foregroundColor(.white)
                             }
                             .padding()
@@ -101,10 +101,10 @@ struct CourseView: View {
                     NavigationLink(destination: BookmarksView()) {
                         HStack {
                             Image(systemName: "bookmark")
-                                .font(.title3)
+                                .font(.brandHeading(.title3))
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                             Text("Bookmarks")
-                                .font(.title3)
+                                .font(.brandHeading(.title3))
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                         }
                         .cornerRadius(10)
@@ -217,7 +217,7 @@ struct CourseInformationPopup: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("Course information")
-                .font(.title2)
+                .font(.brandHeading(.title2))
                 .multilineTextAlignment(.center)
             
             VStack(spacing: 10) {

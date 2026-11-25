@@ -12,7 +12,7 @@ struct DownloadOverlayView: View {
                 
                 VStack {
                     Text("\(viewModel.completedDownloads) / \(Int(viewModel.totalCourses)) courses")
-                        .font(.title2)
+                        .font(.brandHeading(.title2))
                         .foregroundColor(.white)
         
                     CircularProgressView(progress: $viewModel.overallProgress)
@@ -20,7 +20,7 @@ struct DownloadOverlayView: View {
                         .shadow(radius: 10)
                     
                     Text(viewModel.statusMessage)
-                        .font(.subheadline)
+                        .font(.brandBody(.subheadline))
                         .bold()
                         .foregroundColor(.gray)
                         .padding(.top, 10)
@@ -48,7 +48,7 @@ struct DownloadOverlayView: View {
                 
                 if progress < 1.0 {
                     Text(String(format: "%.0f %%", min(self.progress, 1.0) * 100.0))
-                        .font(.largeTitle)
+                        .font(.brandHeading(.largeTitle))
                         .bold()
                         .foregroundColor(.white)
                 } else {

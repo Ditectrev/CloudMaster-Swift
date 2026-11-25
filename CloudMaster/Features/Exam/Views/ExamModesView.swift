@@ -14,13 +14,13 @@ struct ExamModeView: View {
             NavigationLink(destination: ExamView(questionCount: course.exam.quick.questionCount, timeLimit: course.exam.quick.time * 60, course: course, mode: "Quick")) {
                 VStack {
                     Text("Quick")
-                        .font(.title)
+                        .font(.brandHeading(.title))
                     HStack {
                         Text("\(course.exam.quick.questionCount) Questions")
                         Image(systemName: "timer")
                         Text("\(course.exam.quick.time) mins")
                     }
-                    .font(.subheadline)
+                    .font(.brandBody(.subheadline))
                 }
                 .padding()
                 .background(Color.quickMode)
@@ -32,13 +32,13 @@ struct ExamModeView: View {
             NavigationLink(destination: ExamView(questionCount: course.exam.intermediate.questionCount, timeLimit: course.exam.intermediate.time * 60, course: course, mode: "Intermediate")) {
                 VStack {
                     Text("Intermediate")
-                        .font(.title)
+                        .font(.brandHeading(.title))
                     HStack {
                         Text("\(course.exam.intermediate.questionCount) Questions")
                         Image(systemName: "timer")
                         Text("\(course.exam.intermediate.time) mins")
                     }
-                    .font(.subheadline)
+                    .font(.brandBody(.subheadline))
                 }
                 .padding()
                 .background(Color.intermediateMode)
@@ -50,13 +50,13 @@ struct ExamModeView: View {
             NavigationLink(destination: ExamView(questionCount: course.exam.real.questionCount, timeLimit: course.exam.real.time * 60, course: course, mode: "Real")) {
                 VStack {
                     Text("Real Exam")
-                        .font(.title)
+                        .font(.brandHeading(.title))
                     HStack {
                         Text("\(course.exam.real.questionCount) Questions")
                         Image(systemName: "timer")
                         Text("\(course.exam.real.time) mins")
                     }
-                    .font(.subheadline)
+                    .font(.brandBody(.subheadline))
                 }
                 .padding()
                 .background(Color.realMode)
@@ -70,10 +70,10 @@ struct ExamModeView: View {
             NavigationLink(destination: PreviousExamsView(exams: filteredExams)) {
                 HStack {
                     Image(systemName: "clock.arrow.circlepath")
-                        .font(.title3)
+                        .font(.brandHeading(.title3))
                         .foregroundColor(colorScheme == .dark ? .white : .black)
                     Text("Exam History")
-                        .font(.title3)
+                        .font(.brandHeading(.title3))
                         .foregroundColor(filteredExams.isEmpty ? .gray : (colorScheme == .dark ? .white : .black))
                 }
                 .padding()

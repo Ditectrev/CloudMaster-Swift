@@ -17,6 +17,8 @@ class DownloadViewModel: ObservableObject {
     func downloadCourses(_ favorites: Set<Course>) {
         totalCourses = Double(favorites.count)
         completedDownloads = 0
+        downloadProgress.removeAll()
+        overallProgress = 0
         isDownloading = true
         downloadCompleted = false
 
@@ -31,20 +33,13 @@ class DownloadViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self?.downloadProgress[course] = progress
                 self?.statusMessage = status
-                let totalProgress = self?.downloadProgress.values.map({ $0.fractionCompleted / 2 }).reduce(0, +) ?? 0
-                self?.overallProgress = totalProgress / self!.totalCourses
+                self?.publishOverallProgress()
             }
         }) { [weak self] result in
             DispatchQueue.main.async {
-                self?.isDownloading = false
                 switch result {
                 case .success:
-                    self?.completedDownloads += 1
-                    self?.overallProgress = Double(self!.completedDownloads) / self!.totalCourses
-                    if self?.completedDownloads == Int(self!.totalCourses) {
-                        self?.isDownloading = false
-                        self?.downloadCompleted = true
-                    }
+                    self?.markCourseFinished(course)
                 case .failure(let error):
                     self?.alertMessage = "Failed to download \(course.shortName): \(error.localizedDescription)"
                     self?.showAlert = true
@@ -52,6 +47,31 @@ class DownloadViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    private func markCourseFinished(_ course: Course) {
+        completedDownloads += 1
+        if let progress = downloadProgress[course] {
+            progress.completedUnitCount = max(progress.totalUnitCount, 1)
+        } else {
+            let finished = Progress(totalUnitCount: 1)
+            finished.completedUnitCount = 1
+            downloadProgress[course] = finished
+        }
+        publishOverallProgress()
+        if totalCourses > 0, completedDownloads == Int(totalCourses) {
+            overallProgress = 1
+            isDownloading = false
+            downloadCompleted = true
+        }
+    }
+
+    private func publishOverallProgress() {
+        let fractions = downloadProgress.values.map(\.fractionCompleted)
+        overallProgress = DownloadProgress.overall(
+            courseFractions: fractions,
+            totalCourses: Int(totalCourses)
+        )
     }
 
     func cancelDownloads() {

@@ -30,9 +30,11 @@ struct NotificationSettingsView: View {
             .navigationBarTitle("Notification Settings", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
                 isPresented = false
-            }, trailing: Button("Save") {
+            }
+            .font(.brandHeading(.body)), trailing: Button("Save") {
                 saveNotificationSettings()
-            })
+            }
+            .font(.brandHeading(.body)))
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Notification Scheduled"),
