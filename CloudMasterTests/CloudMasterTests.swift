@@ -208,6 +208,19 @@ final class UserExamDataStoreTests: XCTestCase {
         XCTAssertEqual(store.exams.map(\.id), [second.id])
     }
 
+    func testFinishedDownloadReachesOneHundredPercent() {
+        XCTAssertEqual(DownloadProgress.overall(courseFractions: [1], totalCourses: 1), 1)
+        XCTAssertEqual(DownloadProgress.overall(courseFractions: [1, 1], totalCourses: 2), 1)
+        XCTAssertEqual(DownloadProgress.overall(courseFractions: [1, 0.5], totalCourses: 2), 0.75)
+        XCTAssertEqual(DownloadProgress.overall(courseFractions: [], totalCourses: 0), 0)
+        XCTAssertEqual(DownloadProgress.overall(courseFractions: [2], totalCourses: 1), 1)
+    }
+
+    func testDownloadStepsIncludeTheQuestionFileAndEachImage() {
+        XCTAssertEqual(DownloadProgress.stepCount(imageCount: 0), 1)
+        XCTAssertEqual(DownloadProgress.stepCount(imageCount: 4), 5)
+    }
+
     func testReturnToMainMenuReplacesTheHomeNavigationIdentity() {
         let navigation = MainMenuNavigation()
         let original = navigation.resetID

@@ -40,7 +40,10 @@ class DownloadUtility {
                 let markdown = try String(contentsOf: destinationURL, encoding: .utf8)
                 var questions = try parseMarkdown(markdown: markdown, course: course)
                 
-                let totalTasks = questions.count + 1
+                let imageCount = questions.reduce(0) { count, question in
+                    count + ((question["images"] as? [[String: Any]])?.count ?? 0)
+                }
+                let totalTasks = DownloadProgress.stepCount(imageCount: imageCount)
                 let progress = Progress(totalUnitCount: Int64(totalTasks))
                 progress.completedUnitCount = 1
                 progressHandler(progress, "Questions for \(course.shortName)")

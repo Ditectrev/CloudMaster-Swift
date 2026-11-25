@@ -34,6 +34,7 @@
 		8D8D8AE02C05A27800ACC61C /* CloudMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC52C05A27800ACC61C /* CloudMaster.swift */; };
 		8D8D8AE12C05A27800ACC61C /* Courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC62C05A27800ACC61C /* Courses.swift */; };
 		8D8D8AE22C05A27800ACC61C /* DownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */; };
+		8D60A0042C19E20000ACC61C /* DownloadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60A0032C19E20000ACC61C /* DownloadProgress.swift */; };
 		8D8D8AE32C05A27800ACC61C /* FavoriteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */; };
 		8D60A0022C19E10000ACC61C /* MainMenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */; };
 		8D8D8AE42C05A27800ACC61C /* QuestionLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */; };
@@ -97,6 +98,7 @@
 		8D8D8AC52C05A27800ACC61C /* CloudMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudMaster.swift; sourceTree = "<group>"; };
 		8D8D8AC62C05A27800ACC61C /* Courses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courses.swift; sourceTree = "<group>"; };
 		8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadUtility.swift; sourceTree = "<group>"; };
+		8D60A0032C19E20000ACC61C /* DownloadProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadProgress.swift; sourceTree = "<group>"; };
 		8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteStorage.swift; sourceTree = "<group>"; };
 		8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuNavigation.swift; sourceTree = "<group>"; };
 		8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionLoader.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */,
+				8D60A0032C19E20000ACC61C /* DownloadProgress.swift */,
 				8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */,
 				8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */,
 				8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */,
@@ -577,6 +580,7 @@
 				8D8D8ADE2C05A27800ACC61C /* TrainingView.swift in Sources */,
 				8D8D8AD02C05A27800ACC61C /* NotificationSettingsView.swift in Sources */,
 				8D8D8AE22C05A27800ACC61C /* DownloadUtility.swift in Sources */,
+				8D60A0042C19E20000ACC61C /* DownloadProgress.swift in Sources */,
 				8D8D8AD22C05A27800ACC61C /* CoursesView.swift in Sources */,
 				8D8D8AD72C05A27800ACC61C /* ExamView.swift in Sources */,
 				8D8D8ADA2C05A27800ACC61C /* IntroView.swift in Sources */,
