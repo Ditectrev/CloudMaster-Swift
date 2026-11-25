@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Binding var favorites: Set<Course>
+    @StateObject private var mainMenuNavigation = MainMenuNavigation()
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -69,9 +70,11 @@ struct HomeView: View {
             }
             .navigationBarTitle("CloudMaster", displayMode: .inline)
             .navigationBarItems( trailing: settingsButton)
+            .environment(\.mainMenuNavigation, mainMenuNavigation)
         }
         .navigationBarBackButtonHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
+        .id(mainMenuNavigation.resetID)
     }
 
     func saveFavoritesOnDismiss() {

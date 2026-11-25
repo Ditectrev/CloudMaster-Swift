@@ -208,6 +208,18 @@ final class UserExamDataStoreTests: XCTestCase {
         XCTAssertEqual(store.exams.map(\.id), [second.id])
     }
 
+    func testReturnToMainMenuReplacesTheHomeNavigationIdentity() {
+        let navigation = MainMenuNavigation()
+        let original = navigation.resetID
+
+        navigation.returnToMainMenu()
+        XCTAssertNotEqual(navigation.resetID, original)
+
+        let afterFirstReturn = navigation.resetID
+        navigation.returnToMainMenu()
+        XCTAssertNotEqual(navigation.resetID, afterFirstReturn)
+    }
+
     func testAttemptSessionRecordsOnceAndStartsOneCountdown() {
         let session = ExamAttemptSession()
         var ticks = 0

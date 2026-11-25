@@ -1,6 +1,17 @@
 import Foundation
 import SwiftUI
 
+private struct MainMenuNavigationKey: EnvironmentKey {
+    static let defaultValue = MainMenuNavigation()
+}
+
+extension EnvironmentValues {
+    var mainMenuNavigation: MainMenuNavigation {
+        get { self[MainMenuNavigationKey.self] }
+        set { self[MainMenuNavigationKey.self] = newValue }
+    }
+}
+
 struct ExamSummaryView: View {
     @State private var expandedQuestionIDs: Set<UUID> = []
     @State private var showDeleteConfirmation = false
@@ -13,6 +24,7 @@ struct ExamSummaryView: View {
     let afterExam: Bool
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.mainMenuNavigation) private var mainMenuNavigation
     
     var body: some View {
         VStack {
@@ -27,6 +39,18 @@ struct ExamSummaryView: View {
             Text("Correct Answers: \(correctAnswersCount) / \(exam.questions.count)")
                 .font(.title2)
                 .padding(.bottom)
+
+            if afterExam {
+                Button(action: mainMenuNavigation.returnToMainMenu) {
+                    Text("Back to Main Menu")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.customPrimary)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.bottom)
+            }
             
             List {
                 ForEach(exam.questions) { question in

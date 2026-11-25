@@ -35,6 +35,7 @@
 		8D8D8AE12C05A27800ACC61C /* Courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC62C05A27800ACC61C /* Courses.swift */; };
 		8D8D8AE22C05A27800ACC61C /* DownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */; };
 		8D8D8AE32C05A27800ACC61C /* FavoriteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */; };
+		8D60A0022C19E10000ACC61C /* MainMenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */; };
 		8D8D8AE42C05A27800ACC61C /* QuestionLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */; };
 		8D8D8AE52C05A27800ACC61C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D8D8ACC2C05A27800ACC61C /* Preview Assets.xcassets */; };
 		8D8D8AE72C05A2FD00ACC61C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 8D8D8AE62C05A2FD00ACC61C /* LICENSE */; };
@@ -97,6 +98,7 @@
 		8D8D8AC62C05A27800ACC61C /* Courses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courses.swift; sourceTree = "<group>"; };
 		8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadUtility.swift; sourceTree = "<group>"; };
 		8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteStorage.swift; sourceTree = "<group>"; };
+		8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuNavigation.swift; sourceTree = "<group>"; };
 		8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionLoader.swift; sourceTree = "<group>"; };
 		8D8D8ACC2C05A27800ACC61C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8D8D8AE62C05A2FD00ACC61C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 			children = (
 				8D8D8AC82C05A27800ACC61C /* DownloadUtility.swift */,
 				8D8D8AC92C05A27800ACC61C /* FavoriteStorage.swift */,
+				8D60A0012C19E10000ACC61C /* MainMenuNavigation.swift */,
 				8D8D8ACA2C05A27800ACC61C /* QuestionLoader.swift */,
 			);
 			path = Utilities;
@@ -586,6 +589,7 @@
 				8D8D8AE42C05A27800ACC61C /* QuestionLoader.swift in Sources */,
 				8D8D8ACE2C05A27800ACC61C /* ConfirmPopup.swift in Sources */,
 				8D8D8AE32C05A27800ACC61C /* FavoriteStorage.swift in Sources */,
+				8D60A0022C19E10000ACC61C /* MainMenuNavigation.swift in Sources */,
 				8D3F7ABE2C202FD100D200CA /* AllCourses.swift in Sources */,
 				8D26A3202C0EE4A000E9B015 /* QuestionView.swift in Sources */,
 				8D8D8AD62C05A27800ACC61C /* ExamSummaryView.swift in Sources */,
